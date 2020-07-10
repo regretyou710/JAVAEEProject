@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- 該文件用於配置domain物件和表的映射關係 -->
+<hibernate-mapping package="tw.com.domain">
+	<class name="User" table="Shop_User">
+		<!-- id元素用於指定主鍵屬性 -->
+		<id name="ID" column="ID" type="java.lang.String">
+			<!-- 該元素用於指定主鍵值生成策略 -->
+			<generator class="assigned" />
+		</id>
+		<!-- 其他屬性配置 -->
+		<property name="name" type="java.lang.String">
+			<column name="name" not-null="true" length="20" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="password" not-null="true" length="20" />
+		</property>
+		<property name="phoneNum" type="java.lang.String">
+			<column name="phoneNum" not-null="true" length="10" />
+		</property>	
+		<property name="money" type="java.lang.Float">
+			<column name="money" not-null="true" />
+		</property>	
+		<property name="avatar" type="java.lang.String">
+			<column name="avatar" length="50" />
+		</property>	
+		<property name="regTime" type="java.util.Date">
+			<column name="regTime" not-null="true" />
+		</property>	
+		<property name="role" type="java.lang.String">
+			<column name="role" not-null="true" length="1" />
+		</property>		
+	</class>
+</hibernate-mapping>
+

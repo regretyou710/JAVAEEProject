@@ -9,7 +9,7 @@ public class User implements Serializable {
 	private String name;
 	private String password;
 	private String phoneNum;
-	private float money;
+	private Float money;
 	private String avatar;
 	private Date regTime;
 	private String role;
@@ -50,11 +50,11 @@ public class User implements Serializable {
 		this.phoneNum = phoneNum;
 	}
 
-	public float getMoney() {
+	public Float getMoney() {
 		return money;
 	}
 
-	public void setMoney(float money) {
+	public void setMoney(Float money) {
 		this.money = money;
 	}
 

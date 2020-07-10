@@ -19,7 +19,6 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-
 	<!-- 導入資源文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
 	<!-- 配置數據源(連接池) -->
