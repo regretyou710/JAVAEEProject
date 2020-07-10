@@ -63,6 +63,7 @@
 	<mvc:resources location="/login/html/css/" mapping="/login/html/css/**" />
 	<mvc:resources location="/login/html/fonts/" mapping="/login/html/fonts/**" />
 	<mvc:resources location="/login/html/images/" mapping="/login/html/images/**" />	
+	<mvc:resources location="/login/html/js/" mapping="/login/html/js/**" />
 	<mvc:resources location="/login/html/" mapping="/login/html/*.html" />
 	<!-- 開啟SpringMVC框架註解支援 -->
 	<!-- annotation-driven:將默認的組件生效 -->

@@ -1,6 +1,7 @@
 package tw.com.serivce.impl;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,14 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public boolean isExist(String name) {
 		System.out.println("業務層: isExist()..");
-		int num = userDao.getNumByName(name);		
-		return num!=0;
+		String tname = name.trim();
+		Optional<String> op = Optional.ofNullable(tname);
+		int count = 0;
+		
+		if (op.isPresent())
+			count = userDao.getNumByName(tname);
+
+		return count != 0;
 	}
 
 }

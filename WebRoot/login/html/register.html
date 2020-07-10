@@ -27,9 +27,31 @@
 
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	$.function nameChange(name) {
-		alert('g');
-	}
+	$(document).ready(function() {
+
+		$('#txtName').blur(function() {
+			var txtName = $('#txtName').val();
+			//alert(txtName);
+
+			$.ajax({
+				url : '../../user/isExist',
+				contentType : 'application/json;charset=utf-8',
+				data : '{"name":"' + txtName + '"}',
+				dataType : 'json',
+				type : 'post',
+				success : function(data) {
+					//alert(data);
+					if (data) {
+						$('#msg').html('該會員名已經註冊');
+					} else {
+						$('#msg').html('該會員名可以使用');
+					}
+					if(txtName.length == 0)
+					$('#msg').html('');
+				}
+			});
+		});
+	})
 	;
 </script>
 
@@ -70,9 +92,9 @@
 						<div class="field-group">
 							<span class="" aria-hidden="true"></span>
 							<div class="wthree-field">
-								<input name="name" id="name" type="text" placeholder="真實姓名"
-									required="required" onblur="nameChange(this)" />
-							</div>
+								<input name="name" id="txtName" type="text" placeholder="真實姓名"
+									required="required" /><span id="msg"></span>
+							</div>							
 						</div>
 						<div class="field-group">
 							<span class="" aria-hidden="true"></span>

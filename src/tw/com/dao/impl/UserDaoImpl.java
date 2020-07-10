@@ -1,6 +1,8 @@
 package tw.com.dao.impl;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -52,10 +54,13 @@ public class UserDaoImpl implements IUserDao {
 		System.out.println("Dao層 : getNumByName()...");
 		Session session = getCurrentSession();
 		Transaction ts = session.beginTransaction();
-		Query query = session.createQuery("select count(*) from User where User.name=:name");
-		int result = query.setParameter("name", name).list().size();
-		ts.commit();
-		return result;
+		
+		int	count = Integer.parseInt(session.createQuery("select count(*) from User where name=:name")
+					.setParameter("name", name).uniqueResult().toString());
+			System.out.println("count:" + count);
+			ts.commit();
+	
+		return count;
 	}
 
 }
