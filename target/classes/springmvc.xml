@@ -24,6 +24,22 @@
 		<!-- 後綴名 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath">
+			<value>/login/html/</value>
+		</property>
+		
+	</bean>
+	<bean id="htmlviewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="suffix" value=".html" />
+		<property name="order" value="0"></property>
+		<property name="contentType" value="text/html;charset=UTF-8"></property>
+	</bean>
+
+
 
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -38,8 +54,16 @@
 	<!-- 告訴前端控制器那些靜態資源不攔截 -->
 	<mvc:resources location="/css/" mapping="/css/**" />
 	<mvc:resources location="/js/" mapping="/js/**" />
-	<mvc:resources location="/images/" mapping="/images/**" />
-
+	<mvc:resources location="/images/" mapping="/images/**" />	
+	<mvc:resources location="/member/html/css/" mapping="/member/html/css/**" />
+	<mvc:resources location="/member/html/js/" mapping="/member/html/js/**" />
+	<mvc:resources location="/member/html/images/" mapping="/member/html/images/**" />
+	<mvc:resources location="/member/html/fonts/" mapping="/member/html/fonts/**" />
+	<mvc:resources location="/member/html/" mapping="/member/html/*.html" />
+	<mvc:resources location="/login/html/css/" mapping="/login/html/css/**" />
+	<mvc:resources location="/login/html/fonts/" mapping="/login/html/fonts/**" />
+	<mvc:resources location="/login/html/images/" mapping="/login/html/images/**" />	
+	<mvc:resources location="/login/html/" mapping="/login/html/*.html" />
 	<!-- 開啟SpringMVC框架註解支援 -->
 	<!-- annotation-driven:將默認的組件生效 -->
 	<!-- conversion-service:將類型轉換器組件生效 <mvc:annotation-driven conversion-service="conversionServiceFactoryBean" 

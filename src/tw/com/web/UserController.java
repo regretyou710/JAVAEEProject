@@ -17,8 +17,9 @@ public class UserController {
 	@RequestMapping("/register")
 	public String register(User user){
 		System.out.println("控制層: register()...");
+		System.out.println(user);
 		userService.register(user);
-		return "regsuccess";
+		return "redirect:/login/html/login.html";
 	}
 	
 	

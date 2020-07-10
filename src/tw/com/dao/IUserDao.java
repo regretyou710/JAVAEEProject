@@ -12,4 +12,7 @@ public interface IUserDao {
 
 	// 更新頭像
 	public void updateAvatar(String id, String avatar);
+
+	// 驗證註冊用戶名是否重複返回筆數
+	public int getNumByName(String name);
 }

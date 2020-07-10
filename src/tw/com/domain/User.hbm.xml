@@ -20,8 +20,8 @@
 		<property name="phoneNum" type="java.lang.String">
 			<column name="phoneNum" not-null="true" length="10" />
 		</property>	
-		<property name="money" type="java.lang.Float">
-			<column name="money" not-null="true" />
+		<property name="money" type="float">
+			<column name="money" not-null="false"/>
 		</property>	
 		<property name="avatar" type="java.lang.String">
 			<column name="avatar" length="50" />

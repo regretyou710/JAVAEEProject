@@ -55,5 +55,6 @@ public class Testing {
 		System.out.println(dataSource.getDataSourceName());
 		SessionFactoryImpl sessionFactory =  ac.getBean("sessionFactory",SessionFactoryImpl.class);
 		System.out.println(sessionFactory.getCurrentSession().getSessionFactory());
+	
 	}
 }

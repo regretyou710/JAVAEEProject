@@ -8,4 +8,7 @@ public interface IUserService {
 
 	// 用戶登入
 	public User login(String name, String password);
+
+	// 判斷用戶是否存在
+	public boolean isExist(String name);
 }
