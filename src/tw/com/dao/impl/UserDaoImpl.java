@@ -40,7 +40,27 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User getUserByNameAndPwd(String name, String password) {
 		System.out.println("Dao層 : getUserByNameAndPwd()...");
-		return null;
+		Session session = null;
+		Transaction ts = null;
+		User u = null;
+
+		session = getCurrentSession();
+		ts = session.beginTransaction();
+
+		String hql = "select id,name,role from User where name=:name and password=:password";
+
+		List<Object[]> list = session.createQuery(hql).setParameter("name", name).setParameter("password", password)
+				.list();
+
+		for (Object[] objs : list) {
+			u = new User();
+			u.setID(objs[0].toString());
+			u.setName(objs[1].toString());
+			u.setRole(objs[2].toString());
+		}
+		System.out.println("匹配會員:" + u);
+		ts.commit();
+		return u;
 	}
 
 	@Override
@@ -54,12 +74,12 @@ public class UserDaoImpl implements IUserDao {
 		System.out.println("Dao層 : getNumByName()...");
 		Session session = getCurrentSession();
 		Transaction ts = session.beginTransaction();
-		
-		int	count = Integer.parseInt(session.createQuery("select count(*) from User where name=:name")
-					.setParameter("name", name).uniqueResult().toString());
-			System.out.println("count:" + count);
-			ts.commit();
-	
+
+		int count = Integer.parseInt(session.createQuery("select count(*) from User where name=:name")
+				.setParameter("name", name).uniqueResult().toString());
+		System.out.println("count:" + count);
+		ts.commit();
+
 		return count;
 	}
 

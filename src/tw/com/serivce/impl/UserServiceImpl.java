@@ -26,7 +26,9 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User login(String name, String password) {
 		System.out.println("業務層: login()..");
-		return null;
+		String tname = name.trim();
+		String tpwd = password.trim();
+		return userDao.getUserByNameAndPwd(tname, tpwd);
 	}
 
 	@Override

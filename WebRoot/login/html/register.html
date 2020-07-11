@@ -30,7 +30,7 @@
 	$(document).ready(function() {
 
 		$('#txtName').blur(function() {
-			var txtName = $('#txtName').val();
+			var txtName = $('#txtName').val().trim();
 			//alert(txtName);
 
 			$.ajax({
@@ -41,13 +41,20 @@
 				type : 'post',
 				success : function(data) {
 					//alert(data);
+					var msg = data;
 					if (data) {
+						document.getElementById('btn').disabled = true;
 						$('#msg').html('該會員名已經註冊');
+
 					} else {
+						document.getElementById('btn').disabled = false;
 						$('#msg').html('該會員名可以使用');
+
 					}
-					if(txtName.length == 0)
-					$('#msg').html('');
+					if (txtName.length == 0) {
+						document.getElementById('btn').disabled = true;
+						$('#msg').html('不可為空');
+					}
 				}
 			});
 		});
@@ -88,13 +95,13 @@
 					<span class="fa">會員註冊</span>
 				</div>
 				<div class="content-bottom">
-					<form action="../../user/register" method="post">
+					<form action="../../user/register" method="post" name="form">
 						<div class="field-group">
 							<span class="" aria-hidden="true"></span>
 							<div class="wthree-field">
 								<input name="name" id="txtName" type="text" placeholder="真實姓名"
 									required="required" /><span id="msg"></span>
-							</div>							
+							</div>
 						</div>
 						<div class="field-group">
 							<span class="" aria-hidden="true"></span>
@@ -111,7 +118,8 @@
 							</div>
 						</div>
 						<div class="wthree-field">
-							<button type="submit" class="btn">提交</button>
+							<button type="submit" class="btn" id="btn" disabled="true"
+								value="">提交</button>
 						</div>
 					</form>
 				</div>
