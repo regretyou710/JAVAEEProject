@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.text.html.StyleSheet.ListPainter;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -42,31 +44,28 @@ public class UserDaoImpl implements IUserDao {
 		System.out.println("Dao層 : getUserByNameAndPwd()...");
 		Session session = null;
 		Transaction ts = null;
-		User u = null;
+		
 
 		session = getCurrentSession();
 		ts = session.beginTransaction();
 
-		String hql = "select id,name,role from User where name=:name and password=:password";
+		String hql = "from User where name=:name and password=:password";
 
-		List<Object[]> list = session.createQuery(hql).setParameter("name", name).setParameter("password", password)
-				.list();
-
-		for (Object[] objs : list) {
-			u = new User();
-			u.setID(objs[0].toString());
-			u.setName(objs[1].toString());
-			u.setRole(objs[2].toString());
-		}
-		System.out.println("匹配會員:" + u);
+		User user = (User) session.createQuery(hql).setParameter("name", name).setParameter("password", password)
+				.uniqueResult();
+		System.out.println("匹配會員:" + user);
 		ts.commit();
-		return u;
+		return user;
 	}
 
 	@Override
 	public void updateAvatar(String id, String avatar) {
 		System.out.println("Dao層 : updateAvatar()...");
-
+		Session session = getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		String hql = "update User set avatar=:avatar where id=:id";
+		session.createQuery(hql).setParameter("avatar", avatar).setParameter("id", id).executeUpdate();
+		ts.commit();
 	}
 
 	@Override

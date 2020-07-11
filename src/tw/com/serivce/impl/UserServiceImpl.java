@@ -44,4 +44,9 @@ public class UserServiceImpl implements IUserService {
 		return count != 0;
 	}
 
+	@Override
+	public void updateAvatar(String id, String avatar) {
+		userDao.updateAvatar(id, avatar);
+	}
+
 }

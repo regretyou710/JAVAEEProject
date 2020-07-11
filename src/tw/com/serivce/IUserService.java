@@ -11,4 +11,7 @@ public interface IUserService {
 
 	// 判斷用戶是否存在
 	public boolean isExist(String name);
+	
+	//上傳頭像
+	public void updateAvatar(String id, String avatar);
 }
