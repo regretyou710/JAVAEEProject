@@ -60,9 +60,8 @@ public class UserController {
 		System.out.println("控制層: login()...");
 		System.out.println(user);
 		User u = userService.login(user.getName(), user.getPassword());
-		Optional<User> op = Optional.ofNullable(u);
 
-		if (op.isPresent()) {
+		if (u !=null) {
 			model.addAttribute("user", u);
 			return "redirect:../mall/html/index.jsp";
 

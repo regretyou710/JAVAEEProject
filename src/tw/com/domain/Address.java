@@ -9,7 +9,7 @@ public class Address implements java.io.Serializable {
 	// Fields
 
 	private String id;
-	private User user;//多對一，從對象
+	private User user;// 多對一，從對象
 	private String accept;
 	private String zip;
 	private String phoneNum;
@@ -24,32 +24,6 @@ public class Address implements java.io.Serializable {
 	public Address() {
 	}
 
-	/** minimal constructor */
-	public Address(String id, User user, String phoneNum, String city, String area, String address,
-			String isdefault) {
-		this.id = id;
-		this.user = user;
-		this.phoneNum = phoneNum;
-		this.city = city;
-		this.area = area;
-		this.address = address;
-		this.isdefault = isdefault;
-	}
-
-	/** full constructor */
-	public Address(String id, User user, String accept, String zip, String phoneNum, String city,
-			String area, String address, String isdefault) {
-		this.id = id;
-		this.user = user;
-		this.accept = accept;
-		this.zip = zip;
-		this.phoneNum = phoneNum;
-		this.city = city;
-		this.area = area;
-		this.address = address;
-		this.isdefault = isdefault;
-	}
-
 	// Property accessors
 
 	public String getId() {
@@ -58,14 +32,6 @@ public class Address implements java.io.Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public String getAccept() {
@@ -124,11 +90,19 @@ public class Address implements java.io.Serializable {
 		this.isdefault = isdefault;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", user=" + user + ", accept=" + accept + ", zip=" + zip + ", phoneNum=" + phoneNum
 				+ ", city=" + city + ", area=" + area + ", address=" + address + ", isdefault=" + isdefault + "]";
 	}
 
-	
+
 }

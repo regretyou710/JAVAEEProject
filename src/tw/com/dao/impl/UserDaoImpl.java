@@ -1,5 +1,7 @@
 package tw.com.dao.impl;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -43,20 +45,20 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User getUserByNameAndPwd(String name, String password) {
 		System.out.println("Dao層 : getUserByNameAndPwd()...");
-		Session session = null;
-		Transaction ts = null;
-		
-
-		session = getCurrentSession();
-		ts = session.beginTransaction();
+		Session session = getCurrentSession();
+		Transaction ts = session.beginTransaction();
 
 		String hql = "from User where name=:name and password=:password";
 
-		User user = (User) session.createQuery(hql).setParameter("name", name).setParameter("password", password)
-				.uniqueResult();
-		System.out.println("匹配會員:" + user);
-		ts.commit();
-		return user;
+		Query<User> query = session.createQuery(hql);
+		query.setParameter("name", name);
+		query.setParameter("password", password);
+		Optional<User> op = query.stream().findFirst();
+		op.orElse(null);
+		System.out.println("匹配會員:" + op.orElse(null));
+		ts.commit();	
+		
+		return op.orElse(null);
 	}
 
 	@Override

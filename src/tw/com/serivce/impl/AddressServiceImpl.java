@@ -1,5 +1,7 @@
 package tw.com.serivce.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,13 @@ public class AddressServiceImpl implements IAddressService {
 		if(address.getIsdefault()==null)
 			address.setIsdefault("2");
 		addressDao.addAddress(address);
+	}
+
+	@Override
+	public List<Address> getAddresses(String userID) {
+		System.out.println("邏輯層: userID()...");
+		
+		return addressDao.getAddresses(userID);
 	}
 
 }

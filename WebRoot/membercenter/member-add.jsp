@@ -51,14 +51,15 @@
 							height="200px" width="200px" />
 					</c:when>
 					<c:when test="${empty sessionScope.user.avatar}">
-						<img alt="會員頭像" src="../useravatar/default.png" height="200px"
+						<img alt="會員頭像" src="../useravatar/default.jpg" height="200px"
 							width="200px" />
 					</c:when>					
 				</c:choose>
 			</div>
 		</div>
 		<form action="../user/uploadAvatar" method="post"
-			class="form form-horizontal" enctype="multipart/form-data">
+			class="form form-horizontal" enctype="multipart/form-data"
+			accept=".jpg,.png">
 			<div class="row cl">
 				<br /> <label class="form-label col-xs-4 col-sm-3"><span
 					class="c-red"></span>修改頭像：</label>

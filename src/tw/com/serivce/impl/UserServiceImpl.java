@@ -1,5 +1,7 @@
 package tw.com.serivce.impl;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.Date;
 import java.util.Optional;
 
@@ -29,6 +31,7 @@ public class UserServiceImpl implements IUserService {
 		String tname = name.trim();
 		String tpwd = password.trim();
 		return userDao.getUserByNameAndPwd(tname, tpwd);
+		
 	}
 
 	@Override

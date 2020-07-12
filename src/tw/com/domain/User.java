@@ -19,7 +19,7 @@ public class User implements java.io.Serializable {
 	private String avatar;
 	private String regTime;
 	private String role;
-	private Set addresses = new HashSet(0);// 一對多，主對象
+	private Set<Address> addresses = new HashSet(0);// 一對多，主對象
 
 	// Constructors
 
@@ -48,7 +48,7 @@ public class User implements java.io.Serializable {
 		this.avatar = avatar;
 		this.regTime = regTime;
 		this.role = role;
-		this.addresses = addresses;
+		// this.addresses = addresses;
 	}
 
 	// Property accessors
@@ -117,19 +117,18 @@ public class User implements java.io.Serializable {
 		this.role = role;
 	}
 
-	public Set getAddresses() {
-		return this.addresses;
+	public Set<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddresses(Set addresses) {
+	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 
 	@Override
 	public String toString() {
 		return "User [ID=" + ID + ", name=" + name + ", password=" + password + ", phoneNum=" + phoneNum + ", money="
-				+ money + ", avatar=" + avatar + ", regTime=" + regTime + ", role=" + role + ", addresses=" + addresses
-				+ "]";
+				+ money + ", avatar=" + avatar + ", regTime=" + regTime + ", role=" + role + "]";
 	}
 
 }

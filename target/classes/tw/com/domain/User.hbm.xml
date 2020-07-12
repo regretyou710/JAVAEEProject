@@ -45,6 +45,7 @@
                 <comment>角色</comment>
             </column>
         </property>
+        
         <set name="addresses" inverse="true">
             <key>
                 <column name="userID" length="32" not-null="true">
@@ -53,5 +54,6 @@
             </key>
             <one-to-many class="tw.com.domain.Address" />
         </set>
+         
     </class>
 </hibernate-mapping>
