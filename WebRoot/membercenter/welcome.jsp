@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="page-container">
-	<p class="f-20 text-success">會員中心管理中心 <span class="f-14"></span></p>
+	<p class="f-20 text-success">會員管理中心 <span class="f-14"></span></p>
 	<p>登录次数：18 </p>
 	<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>	
 	<table class="table table-border table-bordered table-bg mt-20">
@@ -36,19 +36,19 @@
 		<tbody>
 			<tr>
 				<td>會員名稱</td>
-				<td>192.168.1.1</td>
+				<td>${sessionScope.user.name}</td>
 			</tr>
 			<tr>
 				<td>手機號碼</td>
-				<td>www.h-ui.net</td>
+				<td>${sessionScope.user.phoneNum}</td>
 			</tr>
 			<tr>
 				<td>帳戶餘額</td>
-				<td>80</td>
+				<td>${sessionScope.user.money}</td>
 			</tr>
 			<tr>
 				<td>註冊時間 </td>
-				<td>Microsoft-IIS/6.0</td>
+				<td>${sessionScope.user.regTime}</td>
 			</tr>		
 		</tbody>
 	</table>

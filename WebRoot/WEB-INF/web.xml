@@ -24,6 +24,8 @@
 			<param-value>classpath:springmvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- SpringMVC 是依賴 Servlet 的，雖然 SpringMVC 能識別 Servlet，但它底層的 Servlet 也許還不能識別文件上傳 -->
+		<multipart-config/>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springDispatcherServlet</servlet-name>
@@ -81,4 +83,6 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.woff2</url-pattern>
 	</servlet-mapping>
+	
+	
 </web-app>

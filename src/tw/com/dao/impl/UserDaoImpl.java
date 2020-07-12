@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import tw.com.dao.IUserDao;
 import tw.com.domain.User;
+import tw.com.util.DateTimeUtil;
 import tw.com.util.UUIDUtil;
 
 @Repository
@@ -33,7 +34,7 @@ public class UserDaoImpl implements IUserDao {
 		Session session = getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		user.setID(UUIDUtil.getRandomByUUID());
-		user.setRegTime(new Date());
+		user.setRegTime(DateTimeUtil.getNow());
 		user.setRole("u");
 		session.save(user);
 		ts.commit();

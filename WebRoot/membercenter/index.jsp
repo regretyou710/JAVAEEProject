@@ -1,4 +1,9 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	System.out.println(session.getAttribute("user"));
+	if (session == null || session.getAttribute("user") == null)
+		response.sendRedirect("../login/html/login.html");
+%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -39,9 +44,9 @@
 		<div class="navbar navbar-fixed-top">
 			<div class="container-fluid cl">
 				<a class="logo navbar-logo f-l mr-10 hidden-xs"
-					href="/aboutHui.shtml">Happy購</a> <a
+					href="../mall/html/index.jsp">Happy購</a> <a
 					class="logo navbar-logo-m f-l mr-10 visible-xs"
-					href="/aboutHui.shtml">Happy購</a> <span
+					href="../mall/html/index.jsp">Happy購</a> <span
 					class="logo navbar-slogan f-l mr-10 hidden-xs"></span> <a
 					aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs"
 					href="javascript:;">&#xe667;</a>
@@ -98,19 +103,7 @@
 		</div>
 	</header>
 	<aside class="Hui-aside">
-		<div class="menu_dropdown bk_2">
-			<dl id="menu-article">
-				<dt>
-					<i class="Hui-iconfont">&#xe616;</i> 资讯管理<i
-						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-				</dt>
-				<dd>
-					<ul>
-						<li><a data-href="article-list.html" data-title="资讯管理"
-							href="javascript:void(0)">资讯管理</a></li>
-					</ul>
-				</dd>
-			</dl>
+		<div class="menu_dropdown bk_2">			
 			<dl id="menu-product">
 				<dt>
 					<i class="Hui-iconfont">&#xe620;</i> 产品管理<i
@@ -177,11 +170,23 @@
 			</dl>
 			<dl id="menu-product">
 				<dt>
-					<i class="Hui-iconfont">&#xe620;</i> <a data-href="member-buslist.jsp"
-						data-title="交易紀錄" href="javascript:;"
-						style="text-decoration:none;">交易紀錄</a> <i
+					<i class="Hui-iconfont">&#xe620;</i> <a
+						data-href="member-buslist.jsp" data-title="交易紀錄"
+						href="javascript:;" style="text-decoration:none;">交易紀錄</a> <i
 						class="Hui-iconfont menu_dropdown-arrow"></i>
 				</dt>
+			</dl>
+			<dl id="menu-article">
+				<dt>
+					<i class="Hui-iconfont">&#xe616;</i> 個人設置<i
+						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				</dt>
+				<dd>
+					<ul>
+						<li><a data-href="member-address.jsp" data-title="地址管理"
+							href="javascript:void(0)">地址管理</a></li>
+					</ul>
+				</dd>
 			</dl>
 		</div>
 	</aside>

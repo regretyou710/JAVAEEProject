@@ -20,6 +20,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import tw.com.domain.User;
+import tw.com.util.DateTimeUtil;
 import tw.com.util.HibernateUtil;
 
 public class Testing extends Mockito {
@@ -39,7 +40,7 @@ public class Testing extends Mockito {
 			u1.setPassword("eason1234");
 			u1.setPhoneNum("0960000000");
 			u1.setMoney(553.56F);
-			u1.setRegTime(new java.util.Date());
+			u1.setRegTime(DateTimeUtil.getNow());
 			u1.setRole("1");
 			session.save(u1);
 			ts.commit();

@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -76,7 +76,9 @@
 				<li><a href="index.jsp">首頁</a></li>
 				<li><a href="../../login/html/login.html">登入</a></li>
 				<li><a href="../../login/html/register.html">註冊</a></li>
-				<li><a href="#">會員中心</a></li>
+				<c:if test="${!empty sessionScope.user}">
+					<li><a href="../../membercenter/index.jsp">會員中心</a></li>
+				</c:if>
 				<li><a href="../../user/logout">登出</a></li>
 				<li><a href="#">未開發</a></li>
 				<!-- Search -->
@@ -167,7 +169,9 @@
 				<li class="menu_mm"><a href="index.jsp">首頁</a></li>
 				<li class="menu_mm"><a href="../../login/html/login.html">登入</a></li>
 				<li class="menu_mm"><a href="../../login/html/register.html">註冊</a></li>
-				<li class="menu_mm"><a href="#">會員中心</a></li>
+				<c:if test="${!empty sessionScope.user}">
+					<li class="menu_mm"><a href="../../membercenter/index.jsp">會員中心</a></li>
+				</c:if>
 				<li class="menu_mm"><a href="../../user/logout">登出</a></li>
 				<li class="menu_mm"><a href="#">未開發</a></li>
 			</ul>
@@ -222,14 +226,16 @@
 			<ul>
 				<li><a href="index.jsp">首頁<i class="fa fa-angle-right"
 						aria-hidden="true"></i></a></li>
-				<li><a href="../../login/html/login.html">登入<i class="fa fa-angle-right"
-						aria-hidden="true"></i></a></li>
-				<li><a href="../../login/html/register.html">註冊<i class="fa fa-angle-right"
-						aria-hidden="true"></i></a></li>
-				<li><a href="#">會員中心<i class="fa fa-angle-right"
-						aria-hidden="true"></i></a></li>
-				<li><a href="../../user/logout">登出<i class="fa fa-angle-right"
-						aria-hidden="true"></i></a></li>
+				<li><a href="../../login/html/login.html">登入<i
+						class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+				<li><a href="../../login/html/register.html">註冊<i
+						class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+				<c:if test="${!empty sessionScope.user}">
+					<li><a href="../../membercenter/index.jsp">會員中心<i
+							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+				</c:if>
+				<li><a href="../../user/logout">登出<i
+						class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 				<li><a href="#">未開發<i class="fa fa-angle-right"
 						aria-hidden="true"></i></a></li>
 
