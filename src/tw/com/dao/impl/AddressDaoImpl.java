@@ -51,4 +51,24 @@ public class AddressDaoImpl implements IAddressDao {
 		return list;
 	}
 
+	@Override
+	public void setDefault(String id) {
+		System.out.println("Dao層: setDefault()...");
+		Session session = getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		String hql = "update Address set isdefault=1 where id=:id";
+		session.createQuery(hql).setParameter("id", id).executeUpdate();
+		ts.commit();
+	}
+
+	@Override
+	public void setNotDefault(String userID) {
+		System.out.println("Dao層: setNotDefault()...");
+		Session session = getCurrentSession();
+		Transaction ts = session.beginTransaction();		
+		String hql = "update Address set isdefault=2 where user.ID=:uid and isdefault=1";
+		session.createQuery(hql).setParameter("uid", userID).executeUpdate();
+		ts.commit();
+	}
+
 }

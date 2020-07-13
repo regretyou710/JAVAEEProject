@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.swing.text.html.StyleSheet.ListPainter;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -54,7 +55,9 @@ public class UserDaoImpl implements IUserDao {
 		query.setParameter("name", name);
 		query.setParameter("password", password);
 		Optional<User> op = query.stream().findFirst();
+		//Hibernate.initialize(op.get().getAddresses());//解決延遲加載方式
 		op.orElse(null);
+		
 		System.out.println("匹配會員:" + op.orElse(null));
 		ts.commit();	
 		

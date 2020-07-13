@@ -80,7 +80,7 @@
 							<ul class="dropDown-menu menu radius box-shadow">
 								<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
 								<li><a href="#">切换账户</a></li>
-								<li><a href="#">退出</a></li>
+								<li><a href="../user/logout">退出</a></li>
 							</ul></li>
 						<li id="Hui-msg"><a href="#" title="消息"><span
 								class="badge badge-danger">1</span><i class="Hui-iconfont"
@@ -183,7 +183,7 @@
 				</dt>
 				<dd>
 					<ul>
-						<li><a data-href="member-address.jsp" data-title="地址管理"
+						<li><a data-href="../address/addAddressList" data-title="地址管理"
 							href="javascript:void(0)">地址管理</a></li>
 					</ul>
 				</dd>

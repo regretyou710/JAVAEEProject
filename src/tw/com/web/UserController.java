@@ -75,6 +75,7 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(SessionStatus status) {
 		System.out.println("控制層: logout()...");
+	
 		status.setComplete();
 		return "redirect:/mall/html/index.jsp";
 	}

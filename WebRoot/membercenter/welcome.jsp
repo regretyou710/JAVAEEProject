@@ -1,4 +1,9 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	System.out.println(session.getAttribute("user"));
+	if (session == null || session.getAttribute("user") == null)
+		response.sendRedirect("../login/html/login.html");
+%>
 <!DOCTYPE HTML>
 <html>
 <head>

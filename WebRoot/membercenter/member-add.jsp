@@ -1,6 +1,11 @@
 <%@ page language="java" import="java.util.*,tw.com.domain.*"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	System.out.println(session.getAttribute("user"));
+	if (session == null || session.getAttribute("user") == null)
+		response.sendRedirect("../login/html/login.html");
+%>
 <!DOCTYPE HTML>
 <html>
 <head>

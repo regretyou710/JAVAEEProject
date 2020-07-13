@@ -1,8 +1,14 @@
-﻿<%@page import="java.util.stream.Stream"%>
+﻿<%@page import="tw.com.domain.User"%>
+<%@page import="java.util.stream.Stream"%>
 <%@page import="tw.com.domain.Address"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
+<%
+	System.out.println(session.getAttribute("user"));
+	if (session == null || session.getAttribute("user") == null)
+		response.sendRedirect("../login/html/login.html");
+%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -33,8 +39,8 @@
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <title>Happy購</title>
-<script type="text/javascript" src="js/taiwan.js"></script>
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../membercenter/js/taiwan.js"></script>
+<script type="text/javascript" src="../membercenter/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -62,9 +68,6 @@
 </script>
 </head>
 <body>
-<%
-//List<Address> list = (List)request.getAttribute("addressList");
- %>
 
 	<nav class="breadcrumb">
 		<i class="Hui-iconfont">&#xe67f;</i> 首頁 <span class="c-gray en">&gt;</span>
@@ -91,26 +94,42 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${sessionScope.addressList}" var="address">
+					<c:forEach items="${addressList}" var="address">				
 					<tr class="text-c">
 						<td>${address.accept}</td>
 						<td>${address.city}${address.area}</td>
 						<td>${address.address}</td>
 						<td>${address.phoneNum}</td>
 						<td>${address.zip}</td>
-						<td class="td-status"><span
-							class="label label-success radius">已启用</span></td>
-						<td class="td-manage"><a style="text-decoration:none"
-							onClick="admin_stop(this,'10001')" href="javascript:;" title="停用"><i
-								class="Hui-iconfont">&#xe631;</i></a> <a title="编辑"
-							href="javascript:;"
-							onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')"
-							class="ml-5" style="text-decoration:none"><i
-								class="Hui-iconfont">&#xe6df;</i></a> <a title="删除"
-							href="javascript:;" onclick="admin_del(this,'1')" class="ml-5"
-							style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-					</tr>
-				</c:forEach>
+						<c:if test="${address.isdefault eq 1}" >						
+							<td class="td-status">
+								<span class="label label-success radius">
+									<a style="text-decoration:none;"
+									 href="../address/setDefault?id=${address.id}&isdefault=1">取消默認</a>
+								</span>
+							</td>
+						</c:if>	
+						<c:if test="${address.isdefault eq 2}" >						
+							<td class="td-status">
+								<span class="label label-default radius">
+									<a style="text-decoration:none;"
+									 href="../address/setDefault?id=${address.id}&isdefault=2">設為默認</a>
+								</span>
+							</td>
+						</c:if>					
+						<td class="td-manage">
+							<a title="编辑" href="javascript:;" 
+								onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none">
+								<i class="Hui-iconfont">&#xe6df;</i>
+							</a>							
+							
+							<a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5"
+								style="text-decoration:none">
+								<i class="Hui-iconfont">&#xe6e2;</i>
+							</a>
+						</td>
+					</tr>				
+					</c:forEach>				
 			</tbody>
 		</table>
 	</div>
@@ -130,7 +149,7 @@
 						<th>
 							<div class="formControls col-xs-8 col-sm-9">
 								<input type="text" class="input-text" value="" placeholder=""
-									id="accept" name="accept" style="width: 75%" required="" />
+									id="accept" name="accept" style="width: 75%"  />
 							</div>
 						</th>
 
@@ -167,7 +186,7 @@
 						<td>
 							<div class="formControls col-xs-8 col-sm-9">
 								<input type="text" class="input-text" value="" placeholder=""
-									id="phoneNum" name="phoneNum" style="width: 75%" required="" />
+									id="phoneNum" name="phoneNum" style="width: 75%"  />
 							</div>
 						</td>
 					</tr>
@@ -244,36 +263,7 @@
 		function admin_edit(title, url, id, w, h) {
 			layer_show(title, url, w, h);
 		}
-		/*管理员-停用*/
-		function admin_stop(obj, id) {
-			layer.confirm('確定要停用嗎?', function(index) {
-				//此处请求后台程序，下方是成功后的前台处理……
-	
-				$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-				$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">已禁用</span>');
-				$(obj).remove();
-				layer.msg('已停用!', {
-					icon : 5,
-					time : 1000
-				});
-			});
-		}
-	
-		/*管理员-启用*/
-		function admin_start(obj, id) {
-			layer.confirm('確定要啟用嗎?', function(index) {
-				//此处请求后台程序，下方是成功后的前台处理……
-	
-	
-				$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-				$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-				$(obj).remove();
-				layer.msg('已啟用!', {
-					icon : 6,
-					time : 1000
-				});
-			});
-		}
+		
 	</script>
 </body>
 </html>
