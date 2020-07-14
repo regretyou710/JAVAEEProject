@@ -29,7 +29,7 @@ import tw.com.serivce.IUserService;
 import tw.com.util.UUIDUtil;
 
 @Controller
-@SessionAttributes(value = { "user" })
+@SessionAttributes(value = { "user", "vCode", "admin","msg"})
 @RequestMapping("/user")
 public class UserController {
 
@@ -61,7 +61,7 @@ public class UserController {
 		System.out.println(user);
 		User u = userService.login(user.getName(), user.getPassword());
 
-		if (u !=null) {
+		if (u != null) {
 			model.addAttribute("user", u);
 			return "redirect:../mall/html/index.jsp";
 
@@ -75,7 +75,7 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(SessionStatus status) {
 		System.out.println("控制層: logout()...");
-	
+
 		status.setComplete();
 		return "redirect:/mall/html/index.jsp";
 	}
@@ -112,17 +112,46 @@ public class UserController {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();			
+			e.printStackTrace();
 			return "redirect:/membercenter/member-add.jsp";
 		}
-		userService.updateAvatar(uid, "useravatar/"+suffix);//將上傳圖片存到DB
-		
-		//上傳後將session中的頭像更新
+		userService.updateAvatar(uid, "useravatar/" + suffix);// 將上傳圖片存到DB
+
+		// 上傳後將session中的頭像更新
 		User user = (User) request.getSession().getAttribute("user");
-		user.setAvatar("useravatar/"+suffix);
+		user.setAvatar("useravatar/" + suffix);
 		request.getSession().setAttribute("user", user);
-		
 		return "redirect:/membercenter/member-add.jsp";
-		
+	}
+
+	@RequestMapping("/adminLogin")
+	public String adminLogin(String validCode, String name, String password, Model model) {
+		System.out.println("控制層: adminLogin()...");
+		// 超級管理員登入判斷:
+		// 1.驗證碼是否正確 2.有無匹配對象 3.有無權限
+		String msg = "";
+		String flag = "redirect:../valid/createRandom";
+		String vCode = model.getAttribute("vCode").toString();
+		if (!validCode.equals(vCode)) {
+			msg = "驗證碼不正確";
+			model.addAttribute("msg", msg);
+			return flag;
+		}
+
+		User u = userService.login(name, password);
+		if (u == null) {
+			msg = "帳號或密碼不正確";
+			model.addAttribute("msg", msg);
+			return flag;
+		}
+
+		if (!u.getRole().equals("a")) {
+			msg = "權限不足";
+			model.addAttribute("msg", msg);
+			return flag;
+		}
+
+		model.addAttribute("admin", u);		
+		return "redirect:/admincenter/index.jsp";
 	}
 }

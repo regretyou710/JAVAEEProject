@@ -13,7 +13,7 @@ import tw.com.domain.User;
 import tw.com.serivce.IUserService;
 import tw.com.util.UUIDUtil;
 
-@Service
+@Service()
 public class UserServiceImpl implements IUserService {
 
 	@Autowired

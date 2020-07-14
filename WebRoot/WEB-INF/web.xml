@@ -83,6 +83,9 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.woff2</url-pattern>
 	</servlet-mapping>
-	
+	<!-- 佈署自訂聆聽應用系統初始化設定 -->
+	<listener>
+		<listener-class>tw.com.listener.ApplicationHandler</listener-class>
+	</listener>
 	
 </web-app>

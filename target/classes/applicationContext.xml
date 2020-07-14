@@ -39,10 +39,11 @@
 		<!-- 配置Hibernate配置文件的位置及名稱 -->
 		<property name="configLocation" value="classpath:hibernatetospring.cfg.xml" />
 		<!-- 配置Hibernate映射文件的位置及名稱，可以使用通配符號 -->
-		<property name="mappingLocations" value="classpath:tw/com/domain/*.hbm.xml" />			
+		<property name="mappingLocations" value="classpath:tw/com/domain/*.hbm.xml" />
 	</bean>
 
-
+	
+	
 	<!-- 配置事務管理器 -->
 	<bean id="hibernateTransactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">

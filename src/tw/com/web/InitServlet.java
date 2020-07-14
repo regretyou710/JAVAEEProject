@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +27,10 @@ public class InitServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		ServletContext context = getServletContext();
+		ServletContext context = getServletContext();		
 		context.setAttribute("base", context.getContextPath());
 		context.setAttribute("site", "網路商城");
+		
 	}
 
 }
