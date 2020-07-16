@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.internal.SessionFactoryImpl;
 import org.junit.Test;
-import org.mockito.Mockito;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -23,7 +23,7 @@ import tw.com.domain.User;
 import tw.com.util.DateTimeUtil;
 import tw.com.util.HibernateUtil;
 
-public class Testing extends Mockito {
+public class Testing {
 
 	@Test
 	public void test1() {
@@ -51,16 +51,6 @@ public class Testing extends Mockito {
 		} finally {
 			session.close();
 		}
-
-	}
-
-	@Test
-	public void test2() {
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-		ComboPooledDataSource dataSource = ac.getBean("dataSource", ComboPooledDataSource.class);
-		System.out.println(dataSource.getDataSourceName());
-		SessionFactoryImpl sessionFactory = ac.getBean("sessionFactory", SessionFactoryImpl.class);
-		System.out.println(sessionFactory.getCurrentSession().getSessionFactory());
 
 	}
 

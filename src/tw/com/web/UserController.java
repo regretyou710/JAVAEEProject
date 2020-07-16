@@ -50,7 +50,7 @@ public class UserController {
 	public @ResponseBody boolean isExist(@RequestBody User user) {
 		System.out.println("控制層: isExit()...");
 		System.out.println("ajax:" + user);
-		Boolean result = userService.isExist(user.getName());
+		boolean result = userService.isExist(user.getName());
 		return result;
 
 	}
