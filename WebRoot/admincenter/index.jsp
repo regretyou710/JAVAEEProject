@@ -1,6 +1,5 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-	System.out.println(session.getAttribute("admin"));
+<%	
 	if (session == null || session.getAttribute("admin") == null)
 		response.sendRedirect("../adminlogin/html/index.jsp");
 %>
@@ -56,7 +55,7 @@
 									onclick="article_add('添加资讯','article-add.html')"><i
 										class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
 								<li><a href="javascript:;"
-									onclick="picture_add('添加资讯','picture-add.html')"><i
+									onclick="picture_add('添加资讯','picture-add.jsp')"><i
 										class="Hui-iconfont">&#xe613;</i> 图片</a></li>
 								<li><a href="javascript:;"
 									onclick="product_add('添加资讯','product-add.html')"><i
@@ -135,6 +134,8 @@
 							href="javascript:void(0)">添加分類</a></li>
 						<li><a data-href="../category/getCategories" data-title="分類列表"
 							href="javascript:void(0)">分類列表</a></li>
+						<li><a data-href="../goods/addGoodsCategory" data-title="商品添加"
+							href="javascript:void(0)">商品添加</a></li>
 						<li><a data-href="product-category.html" data-title="分類管理"
 							href="javascript:void(0)">分類管理</a></li>
 						<li><a data-href="product-list.html" data-title="產品管理"

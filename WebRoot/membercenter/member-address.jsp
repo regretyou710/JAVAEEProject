@@ -345,42 +345,45 @@
 			var phoneNumVal = document.getElementById(phoneNumid).value;
 			var zipid = 'zip' + num;
 			var zipVal = document.getElementById(zipid).value;
-			layer.confirm('確定要保存？', function() {
-				$.ajax({
-					type : 'put',
-					url : '../address/updateAddress',
-					dataType : 'json',
-					contentType : 'application/json;charset=utf-8',
-					data : '{"id":"' + id + '","accept":"' + acceptVal + '","city":"' + cityVal + '",'
-						+ '"area":"' + areaVal + '","address":"' + addressVal + '","phoneNum":"' + phoneNumVal + '","zip":"' + zipVal + '"}',
-					success : function(data) {
-						if (data) {
-							layer.msg('已保存!', {
-								icon : 1,
-								time : 1000
-							});
-							var acceptState = document.getElementById(acceptid);
-							var cityState = document.getElementById(cityid);
-							var areaState = document.getElementById(areaid);
-							var addressState = document.getElementById(addressid);
-							var phoneNumState = document.getElementById(phoneNumid);
-							var zipState = document.getElementById(zipid);
-							acceptState.disabled = 'false';
-							acceptState.style.borderStyle = 'none';
-							cityState.disabled = 'false';
-							cityState.style.borderStyle = 'none';
-							areaState.disabled = 'false';
-							areaState.style.borderStyle = 'none';
-							addressState.disabled = 'false';
-							addressState.style.borderStyle = 'none';
-							phoneNumState.disabled = 'false';
-							phoneNumState.style.borderStyle = 'none';
-							zipState.disabled = 'false';
-							zipState.style.borderStyle = 'none';
+			var acceptState = document.getElementById(acceptid);
+			if (acceptState.disabled == false) {
+				layer.confirm('確定要保存？', function() {	
+					$.ajax({
+						type : 'put',
+						url : '../address/updateAddress',
+						dataType : 'json',
+						contentType : 'application/json;charset=utf-8',
+						data : '{"id":"' + id + '","accept":"' + acceptVal + '","city":"' + cityVal + '",'
+							+ '"area":"' + areaVal + '","address":"' + addressVal + '","phoneNum":"' + phoneNumVal + '","zip":"' + zipVal + '"}',
+						success : function(data) {
+							if (data) {
+								layer.msg('已保存!', {
+									icon : 1,
+									time : 1000
+								});
+								var acceptState = document.getElementById(acceptid);
+								var cityState = document.getElementById(cityid);
+								var areaState = document.getElementById(areaid);
+								var addressState = document.getElementById(addressid);
+								var phoneNumState = document.getElementById(phoneNumid);
+								var zipState = document.getElementById(zipid);
+								acceptState.disabled = 'false';
+								acceptState.style.borderStyle = 'none';
+								cityState.disabled = 'false';
+								cityState.style.borderStyle = 'none';
+								areaState.disabled = 'false';
+								areaState.style.borderStyle = 'none';
+								addressState.disabled = 'false';
+								addressState.style.borderStyle = 'none';
+								phoneNumState.disabled = 'false';
+								phoneNumState.style.borderStyle = 'none';
+								zipState.disabled = 'false';
+								zipState.style.borderStyle = 'none';
+							}
 						}
-					}
+					});
 				});
-			});
+			}
 		}
 	</script>
 </body>

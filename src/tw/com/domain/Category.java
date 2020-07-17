@@ -1,5 +1,8 @@
 package tw.com.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * ShopCategory entity. @author MyEclipse Persistence Tools
  */
@@ -11,24 +14,11 @@ public class Category implements java.io.Serializable {
 	private String id;
 	private String name;
 	private Integer goodsNum;
-
+	private Set<Goods> goods = new HashSet(0);// 一對多，主對象
 	// Constructors
 
 	/** default constructor */
 	public Category() {
-	}
-
-	/** minimal constructor */
-	public Category(String id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	/** full constructor */
-	public Category(String id, String name, Integer goodsNum) {
-		this.id = id;
-		this.name = name;
-		this.goodsNum = goodsNum;
 	}
 
 	// Property accessors
@@ -45,7 +35,7 @@ public class Category implements java.io.Serializable {
 		return this.name;
 	}
 
-	public void setName(String name) {		
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -53,8 +43,16 @@ public class Category implements java.io.Serializable {
 		return this.goodsNum;
 	}
 
-	public void setGoodsNum(Integer goodsNum) {		
+	public void setGoodsNum(Integer goodsNum) {
 		this.goodsNum = goodsNum;
+	}
+
+	public Set<Goods> getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Set<Goods> goods) {
+		this.goods = goods;
 	}
 
 	@Override

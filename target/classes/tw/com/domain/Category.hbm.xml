@@ -18,5 +18,13 @@
                 <comment>商品數量</comment>
             </column>
         </property>
+        <set name="goods" inverse="true">
+            <key>
+                <column name="categoryid" length="32" not-null="true">
+                    <comment>商品分類</comment>
+                </column>
+            </key>
+            <one-to-many class="tw.com.domain.Goods" />
+        </set>
     </class>
 </hibernate-mapping>

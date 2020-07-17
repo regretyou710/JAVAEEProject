@@ -16,4 +16,6 @@ public interface ICategoryDao {
 
 	// 修改分類，修改筆數=1返回true
 	public boolean updateCategory(Category category);
+	//增加新商品時，商品數+1 (商品類別id,商品類數量)
+	public void updateGoodsNum(String id,int goodsNum);
 }

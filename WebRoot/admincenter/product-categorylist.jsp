@@ -87,10 +87,8 @@
 			<%
 				}
 			%>
-
 		</tbody>
-	</table>
-	</div>
+	</table>	
 	<!--_footer 作为公共模版分离出去-->
 	<script type="text/javascript"
 		src="../admincenter/lib/jquery/1.9.1/jquery.min.js"></script>
@@ -154,12 +152,12 @@
 			var goodsNumState = document.getElementById(goodsNumid);
 			if (nameState.disabled == true) {
 				nameState.disabled = state;
-				nameState.style.borderStyle = 'solid';	
+				nameState.style.borderStyle = 'solid';
 				goodsNumState.disabled = state;
 				goodsNumState.style.borderStyle = 'solid';
 			} else if (nameState.disabled == false) {
 				nameState.disabled = 'false';
-				nameState.style.borderStyle = 'none';	
+				nameState.style.borderStyle = 'none';
 				goodsNumState.disabled = 'false';
 				goodsNumState.style.borderStyle = 'none';
 			}
@@ -170,31 +168,34 @@
 			var nameVal = document.getElementById(nameid).value;
 			var goodsNumid = 'goodsNum' + num;
 			var goodsNumVal = document.getElementById(goodsNumid).value;
-			layer.confirm('確定要保存？', function() {
-				$.ajax({
-					type : 'put',
-					url : '../category/updateCategory',
-					dataType : 'json',
-					contentType : 'application/json;charset=utf-8',
-					data : '{"id":"' + id + '","name":"' + nameVal + '","goodsNum":"' + goodsNumVal + '"}',
-					success : function(data) {
-						if (data) {
-							layer.msg('已保存!', {
-								icon : 1,
-								time : 1000
-							});
+			var nameState = document.getElementById(nameid);
+			if (nameState.disabled == false) {
+				layer.confirm('確定要保存？', function() {
+					$.ajax({
+						type : 'put',
+						url : '../category/updateCategory',
+						dataType : 'json',
+						contentType : 'application/json;charset=utf-8',
+						data : '{"id":"' + id + '","name":"' + nameVal + '","goodsNum":"' + goodsNumVal + '"}',
+						success : function(data) {
+							if (data) {
+								layer.msg('已保存!', {
+									icon : 1,
+									time : 1000
+								});
 	
-							var nameState = document.getElementById(nameid);
-							nameState.disabled = 'false';
-							nameState.style.borderStyle = 'none';
+								var nameState = document.getElementById(nameid);
+								nameState.disabled = 'false';
+								nameState.style.borderStyle = 'none';
 	
-							var goodsNumState = document.getElementById(goodsNumid);
-							goodsNumState.disabled = 'false';
-							goodsNumState.style.borderStyle = 'none';
+								var goodsNumState = document.getElementById(goodsNumid);
+								goodsNumState.disabled = 'false';
+								goodsNumState.style.borderStyle = 'none';
+							}
 						}
-					}
+					});
 				});
-			});
+			}
 		}
 	</script>
 </body>

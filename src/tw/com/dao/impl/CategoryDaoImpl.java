@@ -48,9 +48,9 @@ public class CategoryDaoImpl implements ICategoryDao {
 		Session session = getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		String hql = "delete from Category where id=:id";
-		int rs = session.createQuery(hql).setParameter("id", id).executeUpdate();		
+		int rs = session.createQuery(hql).setParameter("id", id).executeUpdate();
 		ts.commit();
-		return rs!=0;
+		return rs != 0;
 	}
 
 	@Override
@@ -59,11 +59,21 @@ public class CategoryDaoImpl implements ICategoryDao {
 		Session session = getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		String hql = "update Category set name=:name,goodsNum=:goodsNum where id=:id";
-		int rs = session.createQuery(hql).setParameter("id", category.getId())
-				.setParameter("name", category.getName())
-				.setParameter("goodsNum", category.getGoodsNum()).executeUpdate();		
+		int rs = session.createQuery(hql).setParameter("id", category.getId()).setParameter("name", category.getName())
+				.setParameter("goodsNum", category.getGoodsNum()).executeUpdate();
 		ts.commit();
-		return rs!=0;
+		return rs != 0;
+	}
+
+	@Override
+	public void updateGoodsNum(String id, int goodsNum) {
+		System.out.println("Dao層: updateGoodsNum()...");
+		Session session = getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		String hql = "update Category set goodsNum=:arg1 + goodsNum where id=:arg2";
+		session.createQuery(hql).setParameter("arg1", goodsNum).setParameter("arg2", id).executeUpdate();
+		ts.commit();
+
 	}
 
 }

@@ -80,7 +80,7 @@ out.print("js:"+session);
 					<li><a href="../../login/html/login.html">登入</a></li>
 				</c:if>
 				<c:if
-					test="${not empty sessionScope.user and not empty sessionScope}">
+					test="${not empty sessionScope.user or not empty sessionScope}">
 					<li><a href="../../membercenter/index.jsp">會員中心</a></li>
 					<li><a href="../../user/logout">登出</a></li>
 				</c:if>
@@ -176,7 +176,7 @@ out.print("js:"+session);
 					<li class="menu_mm"><a href="../../login/html/login.html">登入</a></li>
 				</c:if>
 				<c:if
-					test="${not empty sessionScope.user and not empty sessionScope}">
+					test="${not empty sessionScope.user or not empty sessionScope}">
 					<li class="menu_mm"><a href="../../membercenter/index.jsp">會員中心</a></li>
 					<li class="menu_mm"><a href="../../user/logout">登出</a></li>
 				</c:if>
@@ -240,7 +240,7 @@ out.print("js:"+session);
 							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 				</c:if>
 				<c:if
-					test="${not empty sessionScope.user and not empty sessionScope}">
+					test="${not empty sessionScope.user or not empty sessionScope}">
 
 					<li><a href="../../membercenter/index.jsp">會員中心<i
 							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
