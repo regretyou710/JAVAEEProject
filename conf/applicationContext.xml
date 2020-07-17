@@ -22,7 +22,7 @@
 	<!-- 導入資源文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
 	<!-- 配置數據源(連接池) -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${mysql.driver_class}" />
 		<property name="jdbcUrl" value="${mysql.url}" />
 		<property name="user" value="${mysql.username}" />
@@ -54,7 +54,7 @@
 	<tx:advice id="tx" transaction-manager="hibernateTransactionManager">
 		<tx:attributes>
 			<!-- 在設置好的切入點表達式下再次進行事務設置 -->
-			<tx:method name="find*" read-only="true" />
+			<!--<tx:method name="find*" read-only="true" />-->
 			<tx:method name="*" isolation="DEFAULT" />
 		</tx:attributes>
 	</tx:advice>

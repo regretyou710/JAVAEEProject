@@ -31,7 +31,8 @@
 <link rel="stylesheet" type="text/css"
 	href="../membercenter/lib/Hui-iconfont/1.0.8/iconfont.css" />
 <link rel="stylesheet" type="text/css"
-	href="../membercenter/static/h-ui.admin/skin/default/skin.css" id="skin" />
+	href="../membercenter/static/h-ui.admin/skin/default/skin.css"
+	id="skin" />
 <link rel="stylesheet" type="text/css"
 	href="../membercenter/static/h-ui.admin/css/style.css" />
 <!--[if IE 6]>
@@ -40,7 +41,8 @@
 <![endif]-->
 <title>Happy購</title>
 <script type="text/javascript" src="../membercenter/js/taiwan.js"></script>
-<script type="text/javascript" src="../membercenter/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="../membercenter/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -81,10 +83,11 @@
 		<table class="table table-border table-bordered table-bg">
 			<thead>
 				<tr>
-					<th scope="col" colspan="7">已保存的有效地址</th>
+					<th scope="col" colspan="8">已保存的有效地址</th>
 				</tr>
 				<tr class="text-c">
 					<th width="100">收貨人</th>
+					<th width="100">所在城市</th>
 					<th width="100">所在地區</th>
 					<th width="100">街道地址</th>
 					<th width="100">手機</th>
@@ -94,42 +97,63 @@
 				</tr>
 			</thead>
 			<tbody>
-					<c:forEach items="${addressList}" var="address">				
-					<tr class="text-c">
-						<td>${address.accept}</td>
-						<td>${address.city}${address.area}</td>
-						<td>${address.address}</td>
-						<td>${address.phoneNum}</td>
-						<td>${address.zip}</td>
-						<c:if test="${address.isdefault eq 1}" >						
-							<td class="td-status">
-								<span class="label label-success radius">
-									<a style="text-decoration:none;"
-									 href="../address/setDefault?id=${address.id}&isdefault=1">取消默認</a>
-								</span>
-							</td>
-						</c:if>	
-						<c:if test="${address.isdefault eq 2}" >						
-							<td class="td-status">
-								<span class="label label-default radius">
-									<a style="text-decoration:none;"
-									 href="../address/setDefault?id=${address.id}&isdefault=2">設為默認</a>
-								</span>
-							</td>
-						</c:if>					
-						<td class="td-manage">
-							<a title="编辑" href="javascript:;" 
-								onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none">
-								<i class="Hui-iconfont">&#xe6df;</i>
-							</a>							
-							
-							<a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5"
-								style="text-decoration:none">
-								<i class="Hui-iconfont">&#xe6e2;</i>
-							</a>
-						</td>
-					</tr>				
-					</c:forEach>				
+				<%
+					List<Address> items = (List) request.getAttribute("addressList");
+					int i = 0;
+					for (Address rs : items) {
+						i++;
+				%>
+
+				<tr class="text-c">
+					<td><input type="text" id="accept<%=i%>"
+						value="<%=rs.getAccept()%>" class="input-text"
+						style="border-style:none;text-align:center;" disabled="true" /></td>
+					<td><input type="text" id="city<%=i%>"
+						value="<%=rs.getCity()%>" class="input-text"
+						style="border-style:none;text-align:center;" disabled="true" /></td>
+					<td><input type="text" id="area<%=i%>"
+						value="<%=rs.getArea()%>" class="input-text"
+						style="border-style:none;text-align:center;" disabled="true" /></td>
+					<td><input type="text" id="address<%=i%>"
+						value="<%=rs.getAddress()%>" class="input-text"
+						style="border-style:none;text-align:center;" disabled="true" /></td>
+					<td><input type="text" id="phoneNum<%=i%>"
+						value="<%=rs.getPhoneNum()%>" class="input-text"
+						style="border-style:none;text-align:center;" disabled="true" /></td>
+					<td><input type="text" id="zip<%=i%>" value="<%=rs.getZip()%>"
+						class="input-text" style="border-style:none;text-align:center;"
+						disabled="true" /></td>
+					<%
+						if (rs.getIsdefault().equals("1")) {
+					%>
+					<td class="td-status"><span class="label label-success radius">
+							<a style="text-decoration:none;"
+							href="../address/setDefault?id=<%=rs.getId()%>&isdefault=1">取消默認</a>
+					</span></td>
+					<%
+						} else if (rs.getIsdefault().equals("2")) {
+					%>
+					<td class="td-status"><span class="label label-default radius">
+							<a style="text-decoration:none;"
+							href="../address/setDefault?id=<%=rs.getId()%>&isdefault=2">設為默認</a>
+					</span></td>
+					<%
+						}
+					%>
+					<td class="td-manage"><a title="編輯" href="javascript:;"
+						onclick="edit(false,'<%=i%>')" class="ml-5"
+						style="text-decoration:none"> <i class="Hui-iconfont">&#xe6df;</i>
+					</a> <a title='保存' href='javascript:;'
+						onclick="update('<%=rs.getId()%>','<%=i%>')" class='ml-5'
+						style='text-decoration:none'> <i class='Hui-iconfont'>&#xe632;</i>
+					</a> </a> <a title='删除' href='javascript:;'
+						onclick="admin_del(this,'<%=rs.getId()%>')" class='ml-5'
+						style='text-decoration:none'> <i class='Hui-iconfont'>&#xe6e2;</i>
+					</a></td>
+				</tr>
+				<%
+					}
+				%>
 			</tbody>
 		</table>
 	</div>
@@ -149,10 +173,9 @@
 						<th>
 							<div class="formControls col-xs-8 col-sm-9">
 								<input type="text" class="input-text" value="" placeholder=""
-									id="accept" name="accept" style="width: 75%"  />
+									id="accept" name="accept" style="width: 75%" />
 							</div>
 						</th>
-
 					</tr>
 					<tr class="text-c">
 						<td>所在地區</td>
@@ -186,7 +209,7 @@
 						<td>
 							<div class="formControls col-xs-8 col-sm-9">
 								<input type="text" class="input-text" value="" placeholder=""
-									id="phoneNum" name="phoneNum" style="width: 75%"  />
+									id="phoneNum" name="phoneNum" style="width: 75%" />
 							</div>
 						</td>
 					</tr>
@@ -213,18 +236,23 @@
 		</table>
 	</div>
 	<!--_footer 作为公共模版分离出去-->
-	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
-	<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
-	<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+	<script type="text/javascript"
+		src="../membercenter/lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="../membercenter/lib/layer/2.4/layer.js"></script>
+	<script type="text/javascript"
+		src="../membercenter/static/h-ui/js/H-ui.min.js"></script>
+	<script type="text/javascript"
+		src="../membercenter/static/h-ui.admin/js/H-ui.admin.js"></script>
 	<!--/_footer 作为公共模版分离出去-->
 
 	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript"
-		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+		src="../membercenter/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 	<script type="text/javascript"
-		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+		src="../membercenter/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="../membercenter/lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
 		/*
 			参数解释：
@@ -240,30 +268,120 @@
 		}
 		/*管理员-删除*/
 		function admin_del(obj, id) {
-			layer.confirm('確定要刪除嗎?', function(index) {
+			layer.confirm('確定要刪除嗎?', function() {
 				$.ajax({
-					type : 'POST',
-					url : '',
+					type : 'delete',
+					url : '../address/delAddress',
+					contentType : 'application/json;charset=utf-8',
 					dataType : 'json',
+					data : '{"id":"' + id + '"}',
 					success : function(data) {
 						$(obj).parents("tr").remove();
 						layer.msg('已删除!', {
 							icon : 1,
 							time : 1000
 						});
-					},
-					error : function(data) {
-						console.log(data.msg);
-					},
+					}
 				});
 			});
 		}
 	
 		/*管理员-编辑*/
-		function admin_edit(title, url, id, w, h) {
-			layer_show(title, url, w, h);
+		function edit(state, num) {
+			var acceptid = 'accept' + num;
+			var cityid = 'city' + num;
+			var areaid = 'area' + num;
+			var addressid = 'address' + num;
+			var phoneNumid = 'phoneNum' + num;
+			var zipid = 'zip' + num;
+	
+	
+			var acceptState = document.getElementById(acceptid);
+			var cityState = document.getElementById(cityid);
+			var areaState = document.getElementById(areaid);
+			var addressState = document.getElementById(addressid);
+			var phoneNumState = document.getElementById(phoneNumid);
+			var zipState = document.getElementById(zipid);
+	
+			if (acceptState.disabled == true) {
+				acceptState.disabled = state;
+				acceptState.style.borderStyle = 'solid';
+				cityState.disabled = state;
+				cityState.style.borderStyle = 'solid';
+				areaState.disabled = state;
+				areaState.style.borderStyle = 'solid';
+				addressState.disabled = state;
+				addressState.style.borderStyle = 'solid';
+				phoneNumState.disabled = state;
+				phoneNumState.style.borderStyle = 'solid';
+				zipState.disabled = state;
+				zipState.style.borderStyle = 'solid';
+	
+			} else if (acceptState.disabled == false) {
+				acceptState.disabled = 'false';
+				acceptState.style.borderStyle = 'none';
+				cityState.disabled = 'false';
+				cityState.style.borderStyle = 'none';
+				areaState.disabled = 'false';
+				areaState.style.borderStyle = 'none';
+				addressState.disabled = 'false';
+				addressState.style.borderStyle = 'none';
+				phoneNumState.disabled = 'false';
+				phoneNumState.style.borderStyle = 'none';
+				zipState.disabled = 'false';
+				zipState.style.borderStyle = 'none';
+			}
 		}
-		
+		function update(id, num) {
+			var acceptid = 'accept' + num;
+			var acceptVal = document.getElementById(acceptid).value;
+			var cityid = 'city' + num;
+			var cityVal = document.getElementById(cityid).value;
+			var areaid = 'area' + num;
+			var areaVal = document.getElementById(areaid).value;
+			var addressid = 'address' + num;
+			var addressVal = document.getElementById(addressid).value;
+			var phoneNumid = 'phoneNum' + num;
+			var phoneNumVal = document.getElementById(phoneNumid).value;
+			var zipid = 'zip' + num;
+			var zipVal = document.getElementById(zipid).value;
+			layer.confirm('確定要保存？', function() {
+				$.ajax({
+					type : 'put',
+					url : '../address/updateAddress',
+					dataType : 'json',
+					contentType : 'application/json;charset=utf-8',
+					data : '{"id":"' + id + '","accept":"' + acceptVal + '","city":"' + cityVal + '",'
+						+ '"area":"' + areaVal + '","address":"' + addressVal + '","phoneNum":"' + phoneNumVal + '","zip":"' + zipVal + '"}',
+					success : function(data) {
+						if (data) {
+							layer.msg('已保存!', {
+								icon : 1,
+								time : 1000
+							});
+							var acceptState = document.getElementById(acceptid);
+							var cityState = document.getElementById(cityid);
+							var areaState = document.getElementById(areaid);
+							var addressState = document.getElementById(addressid);
+							var phoneNumState = document.getElementById(phoneNumid);
+							var zipState = document.getElementById(zipid);
+							acceptState.disabled = 'false';
+							acceptState.style.borderStyle = 'none';
+							cityState.disabled = 'false';
+							cityState.style.borderStyle = 'none';
+							areaState.disabled = 'false';
+							areaState.style.borderStyle = 'none';
+							addressState.disabled = 'false';
+							addressState.style.borderStyle = 'none';
+							phoneNumState.disabled = 'false';
+							phoneNumState.style.borderStyle = 'none';
+							zipState.disabled = 'false';
+							zipState.style.borderStyle = 'none';
+						}
+					}
+				});
+			});
+		}
 	</script>
 </body>
 </html>

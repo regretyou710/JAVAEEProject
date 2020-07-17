@@ -47,7 +47,10 @@
 </head>
 
 <body>
-
+<%
+out.print(session.getAttribute("user"));
+out.print("js:"+session);
+ %>
 	<div class="super_container">
 
 		<!-- Header -->
@@ -72,12 +75,15 @@
 			<nav class="header_nav">
 			<ul class="d-flex flex-row align-items-center justify-content-start">
 				<li><a href="index.jsp">首頁</a></li>
-				<li><a href="../../login/html/login.html">登入</a></li>
-				<li><a href="../../login/html/register.html">註冊</a></li>
-				<c:if test="${!empty sessionScope.user}">
-					<li><a href="../../membercenter/index.jsp">會員中心</a></li>
+				<c:if test="${empty sessionScope.user or empty sessionScope}">
+					<li><a href="../../login/html/register.html">註冊</a></li>
+					<li><a href="../../login/html/login.html">登入</a></li>
 				</c:if>
-				<li><a href="../../user/logout">登出</a></li>
+				<c:if
+					test="${not empty sessionScope.user and not empty sessionScope}">
+					<li><a href="../../membercenter/index.jsp">會員中心</a></li>
+					<li><a href="../../user/logout">登出</a></li>
+				</c:if>
 				<li><a href="#">未開發</a></li>
 				<!-- Search -->
 				<li><div class="">
@@ -165,12 +171,15 @@
 			<nav class="menu_nav">
 			<ul class="menu_mm">
 				<li class="menu_mm"><a href="index.jsp">首頁</a></li>
-				<li class="menu_mm"><a href="../../login/html/login.html">登入</a></li>
-				<li class="menu_mm"><a href="../../login/html/register.html">註冊</a></li>
-				<c:if test="${!empty sessionScope.user}">
-					<li class="menu_mm"><a href="../../membercenter/index.jsp">會員中心</a></li>
+				<c:if test="${empty sessionScope.user or empty sessionScope}">
+					<li class="menu_mm"><a href="../../login/html/register.html">註冊</a></li>
+					<li class="menu_mm"><a href="../../login/html/login.html">登入</a></li>
 				</c:if>
-				<li class="menu_mm"><a href="../../user/logout">登出</a></li>
+				<c:if
+					test="${not empty sessionScope.user and not empty sessionScope}">
+					<li class="menu_mm"><a href="../../membercenter/index.jsp">會員中心</a></li>
+					<li class="menu_mm"><a href="../../user/logout">登出</a></li>
+				</c:if>
 				<li class="menu_mm"><a href="#">未開發</a></li>
 			</ul>
 			</nav>
@@ -224,19 +233,22 @@
 			<ul>
 				<li><a href="index.jsp">首頁<i class="fa fa-angle-right"
 						aria-hidden="true"></i></a></li>
-				<li><a href="../../login/html/login.html">登入<i
-						class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-				<li><a href="../../login/html/register.html">註冊<i
-						class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-				<c:if test="${!empty sessionScope.user}">
-					<li><a href="../../membercenter/index.jsp">會員中心<i
+				<c:if test="${empty sessionScope.user or empty sessionScope}">
+					<li><a href="../../login/html/register.html">註冊<i
+							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+					<li><a href="../../login/html/login.html">登入<i
 							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 				</c:if>
-				<li><a href="../../user/logout">登出<i
-						class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+				<c:if
+					test="${not empty sessionScope.user and not empty sessionScope}">
+
+					<li><a href="../../membercenter/index.jsp">會員中心<i
+							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+					<li><a href="../../user/logout">登出<i
+							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+				</c:if>
 				<li><a href="#">未開發<i class="fa fa-angle-right"
 						aria-hidden="true"></i></a></li>
-
 			</ul>
 			</nav>
 

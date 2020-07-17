@@ -1,11 +1,6 @@
 <%@page import="tw.com.web.RandomController"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	System.out.println(session.getAttribute("vCode"));
-	if (session == null || session.getAttribute("vCode") == null)
-		response.sendRedirect("../../valid/createRandom");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +58,7 @@
 						<input type="text" name="validCode" /> <img alt="請輸入圖片字元"
 							src="../../images/vCode.jpg" id="img">
 						<p>
-							<a href="../../valid/createRandom" style="color:#00D6D6;">看不清楚？換一張</a>
+							<a href="../../valid/resetRandom" style="color:#00D6D6;">看不清楚？換一張</a>
 						</p>
 						<div class="w3_agile_login">
 							<input type="submit" value="登入">

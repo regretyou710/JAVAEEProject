@@ -29,7 +29,7 @@ import tw.com.serivce.IUserService;
 import tw.com.util.UUIDUtil;
 
 @Controller
-@SessionAttributes(value = { "user", "vCode", "admin","msg"})
+@SessionAttributes(value = { "user", "vCode", "admin", "msg" })
 @RequestMapping("/user")
 public class UserController {
 
@@ -130,8 +130,15 @@ public class UserController {
 		// 超級管理員登入判斷:
 		// 1.驗證碼是否正確 2.有無匹配對象 3.有無權限
 		String msg = "";
-		String flag = "redirect:../valid/createRandom";
-		String vCode = model.getAttribute("vCode").toString();
+		String flag = "redirect:../valid/resetRandom";
+		
+		if (model.getAttribute("vCode") == null){
+			msg = "操作逾時";
+			model.addAttribute("msg", msg);
+			return flag;
+		}
+		
+		String vCode = model.getAttribute("vCode").toString();		
 		if (!validCode.equals(vCode)) {
 			msg = "驗證碼不正確";
 			model.addAttribute("msg", msg);
@@ -151,7 +158,7 @@ public class UserController {
 			return flag;
 		}
 
-		model.addAttribute("admin", u);		
+		model.addAttribute("admin", u);
 		return "redirect:/admincenter/index.jsp";
 	}
 }

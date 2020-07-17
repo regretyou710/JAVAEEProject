@@ -41,11 +41,23 @@ public class AddressServiceImpl implements IAddressService {
 	@Override
 	public void setDefault(Address address) {
 		System.out.println("邏輯層: setDefault()...");
-		//設定選中的地址為默認前，先將其他的默認改為非默認
+		// 設定選中的地址為默認前，先將其他的默認改為非默認
 		addressDao.setNotDefault(address.getUser().getID());
-		//將非默認改為默認 2->1
-		if(address.getIsdefault().equals("2"))
+		// 將非默認改為默認 2->1
+		if (address.getIsdefault().equals("2"))
 			addressDao.setDefault(address.getId());
+	}
+
+	@Override
+	public boolean delAddress(String id) {
+		System.out.println("邏輯層: delAddress()...");
+		return addressDao.delAddress(id);
+	}
+
+	@Override
+	public boolean updateAddress(Address address) {
+		System.out.println("邏輯層: updateAddress()...");
+		return addressDao.updateAddress(address);
 	}
 
 }

@@ -1,5 +1,5 @@
-﻿<%@page import="tw.com.domain.Category"%>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*,tw.com.domain.*"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	System.out.println(session.getAttribute("admin"));
@@ -59,31 +59,35 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${categoryList}" var="category" varStatus="s">
-				<tr class="text-c">
 
-					<td><input type="text" id="num" value="${category.name}"style="border-style:none" /></td>
-					<td><input type="text" id="name" value="${category.name}" class="input-text"
-						style="border-style:none" disabled="true" /></td>
-					<td><input type="text" id="goodsNum"
-						value="${category.goodsNum}" style="border-style:none" class="input-text"
-						disabled="true" /></td>
+			<%
+				List<Category> list = (List) request.getAttribute("categoryList");
+				int i = 0;
+				for (Category g : list) {
+					i++;
+			%>
+			<tr class="text-c">
+				<td><span id="num" value="<%=i%>"><%=i%></span></td>
+				<td><input type="text" id="name<%=i%>" value="<%=g.getName()%>"
+					class="input-text" style="border-style:none" disabled="true" /></td>
+				<td><input type="text" id="goodsNum<%=i%>"
+					value="<%=g.getGoodsNum()%>" style="border-style:none"
+					class="input-text" disabled="true" /></td>
+				<td class='td-manage'><a title='編輯' href='javascript:;'
+					onclick="edit(false,'<%=i%>')" class='ml-5'
+					style='text-decoration:none'> <i class='Hui-iconfont'>&#xe6df;</i>
+				</a> <a title='保存' href='javascript:;'
+					onclick="update('<%=g.getId()%>','<%=i%>')" class='ml-5'
+					style='text-decoration:none'> <i class='Hui-iconfont'>&#xe632;</i>
+				</a> <a title='删除' href='javascript:;'
+					onclick="admin_del(this,'<%=g.getId()%>')" class='ml-5'
+					style='text-decoration:none'> <i class='Hui-iconfont'>&#xe6e2;</i>
+				</a></td>
+			</tr>
+			<%
+				}
+			%>
 
-					<c:set var="ary">${category.name},${category.goodsNum}</c:set>
-
-
-					<td class='td-manage'><a title='編輯' href='javascript:;'
-						onclick="edit(false,'${category.name}')" class='ml-5' style='text-decoration:none'>
-							<i class='Hui-iconfont'>&#xe6df;</i>
-					</a> <a title='保存' href='javascript:;'
-						onclick="update('${category.id}')" class='ml-5'
-						style='text-decoration:none'> <i class='Hui-iconfont'>&#xe632;</i>
-					</a> <a title='删除' href='javascript:;'
-						onclick="admin_del(this,'${category.id}')" class='ml-5'
-						style='text-decoration:none'> <i class='Hui-iconfont'>&#xe6e2;</i>
-					</a></td>
-				</tr>
-			</c:forEach>
 		</tbody>
 	</table>
 	</div>
@@ -143,37 +147,50 @@
 		}
 	
 		/*管理员-编辑*/
-		function edit(state,num) {
-		var numid = $('#num').val();
-	alert(num);
-	alert(numid);
-		if(num==num){
-			var nameState = document.getElementById('name');	
-			nameState.disabled = state;
-			nameState.style.borderStyle = 'solid';
-			
-			var goodsNum = document.getElementById('goodsNum');	
-			goodsNum.disabled = state;
-			goodsNum.style.borderStyle = 'solid';
+		function edit(state, num) {
+			var nameid = 'name' + num;
+			var goodsNumid = 'goodsNum' + num;
+			var nameState = document.getElementById(nameid);
+			var goodsNumState = document.getElementById(goodsNumid);
+			if (nameState.disabled == true) {
+				nameState.disabled = state;
+				nameState.style.borderStyle = 'solid';	
+				goodsNumState.disabled = state;
+				goodsNumState.style.borderStyle = 'solid';
+			} else if (nameState.disabled == false) {
+				nameState.disabled = 'false';
+				nameState.style.borderStyle = 'none';	
+				goodsNumState.disabled = 'false';
+				goodsNumState.style.borderStyle = 'none';
 			}
 		}
 	
-		function update(id) {
-			var name = $('#name').val();
-			var goodsNum = $('#goodsNum').val();
+		function update(id, num) {
+			var nameid = 'name' + num;
+			var nameVal = document.getElementById(nameid).value;
+			var goodsNumid = 'goodsNum' + num;
+			var goodsNumVal = document.getElementById(goodsNumid).value;
 			layer.confirm('確定要保存？', function() {
 				$.ajax({
 					type : 'put',
 					url : '../category/updateCategory',
 					dataType : 'json',
 					contentType : 'application/json;charset=utf-8',
-					data : '{"id":"' + id + '","name":"' + name + '","goodsNum":"' + goodsNum + '"}',
+					data : '{"id":"' + id + '","name":"' + nameVal + '","goodsNum":"' + goodsNumVal + '"}',
 					success : function(data) {
 						if (data) {
 							layer.msg('已保存!', {
 								icon : 1,
 								time : 1000
 							});
+	
+							var nameState = document.getElementById(nameid);
+							nameState.disabled = 'false';
+							nameState.style.borderStyle = 'none';
+	
+							var goodsNumState = document.getElementById(goodsNumid);
+							goodsNumState.disabled = 'false';
+							goodsNumState.style.borderStyle = 'none';
 						}
 					}
 				});
