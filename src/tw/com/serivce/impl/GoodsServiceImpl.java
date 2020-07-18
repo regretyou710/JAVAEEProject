@@ -1,5 +1,7 @@
 package tw.com.serivce.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,12 @@ public class GoodsServiceImpl implements IGoodsService {
 		goodsDao.addGoods(goods);
 		//當新增一筆商品歸類到所屬分類，該分類就加1
 		categoryDao.updateGoodsNum(goods.getCategory().getId(), 1);
+	}
+
+	@Override
+	public List<Object[]> getGoods(Object[] params) {
+		System.out.println("邏輯層: getGoods()...");
+		return goodsDao.getGoods(params);
 	}
 
 }

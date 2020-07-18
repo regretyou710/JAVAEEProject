@@ -38,6 +38,14 @@
 	rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首頁 <span class="c-gray en">&gt;</span>
+		產品管理 <span class="c-gray en">&gt;</span> 添加商品 <a
+			class="btn btn-success radius r"
+			style="line-height:1.6em;margin-top:3px"
+			href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
 	<div class="page-container">
 		<form class="form form-horizontal" id="form-article-add" method="post"
 			enctype="multipart/form-data" action="../goods/addGoods">
@@ -80,11 +88,11 @@
 									value="${goodsNo}" placeholder="" id="goodsNo" name="goodsNo"
 									readonly="readonly" style="border-style: none;"></td>
 								<td><input type="number" class="input-text" value="15"
-									placeholder="" id="stock" name="stock" step="1"/></td>
+									placeholder="" id="stock" name="stock" step="1" /></td>
 								<td><input type="number" class="input-text" value="5.5"
-									placeholder="" id="price1" name="price1" step="0.1"/></td>
+									placeholder="" id="price1" name="price1" step="0.1" /></td>
 								<td><input type="number" class="input-text" value="6.5"
-									placeholder="" id="price2" name="price2" step="0.1"/></td>
+									placeholder="" id="price2" name="price2" step="0.1" /></td>
 							</tr>
 						</tbody>
 					</table>

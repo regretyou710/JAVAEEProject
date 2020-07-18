@@ -54,8 +54,8 @@
 	<tx:advice id="tx" transaction-manager="hibernateTransactionManager">
 		<tx:attributes>
 			<!-- 在設置好的切入點表達式下再次進行事務設置 -->
-			<!--<tx:method name="find*" read-only="true" />-->
-			<tx:method name="*" isolation="DEFAULT" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" isolation="DEFAULT" />
 		</tx:attributes>
 	</tx:advice>
 

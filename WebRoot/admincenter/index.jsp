@@ -1,5 +1,5 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%	
+<%
 	if (session == null || session.getAttribute("admin") == null)
 		response.sendRedirect("../adminlogin/html/index.jsp");
 %>
@@ -34,6 +34,7 @@
 <![endif]-->
 <title>Happy購</title>
 </head>
+
 <body>
 	<header class="navbar-wrapper">
 		<div class="navbar navbar-fixed-top">
@@ -125,17 +126,20 @@
 			</dl>
 			<dl id="menu-product">
 				<dt>
-					<i class="Hui-iconfont">&#xe620;</i> 產品管理<i
+					<i class="Hui-iconfont">&#xe620;</i> 商品管理<i
 						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 				</dt>
 				<dd>
 					<ul>
+						<li><a data-href="../category/getCategories"
+							data-title="分類列表" href="javascript:void(0)">分類列表</a></li>
+						<li><a data-href="../goods/getGoods" data-title="商品列表"
+							href="javascript:void(0)">商品列表</a></li>
 						<li><a data-href="product-addcategory.jsp" data-title="添加分類"
 							href="javascript:void(0)">添加分類</a></li>
-						<li><a data-href="../category/getCategories" data-title="分類列表"
-							href="javascript:void(0)">分類列表</a></li>
-						<li><a data-href="../goods/addGoodsCategory" data-title="商品添加"
-							href="javascript:void(0)">商品添加</a></li>
+						<li><a data-href="../goods/addGoodsCategory"
+							data-title="添加商品" href="javascript:void(0)">添加商品</a></li>
+						<li><hr /></li>
 						<li><a data-href="product-category.html" data-title="分類管理"
 							href="javascript:void(0)">分類管理</a></li>
 						<li><a data-href="product-list.html" data-title="產品管理"

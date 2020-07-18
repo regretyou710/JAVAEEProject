@@ -69,9 +69,9 @@
 			<tr class="text-c">
 				<td><span id="num" value="<%=i%>"><%=i%></span></td>
 				<td><input type="text" id="name<%=i%>" value="<%=g.getName()%>"
-					class="input-text" style="border-style:none" disabled="true" /></td>
+					class="input-text" style="border-style:none;text-align: center;" disabled="true" /></td>
 				<td><input type="text" id="goodsNum<%=i%>"
-					value="<%=g.getGoodsNum()%>" style="border-style:none"
+					value="<%=g.getGoodsNum()%>" style="border-style:none;text-align: center;"
 					class="input-text" disabled="true" /></td>
 				<td class='td-manage'><a title='編輯' href='javascript:;'
 					onclick="edit(false,'<%=i%>')" class='ml-5'

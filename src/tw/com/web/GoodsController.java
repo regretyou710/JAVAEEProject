@@ -35,6 +35,7 @@ public class GoodsController {
 	private HttpServletRequest request;
 	private String goodsNo;
 	private List<Category> categoryList;
+	private List<Object[]> goodsList;
 
 	@RequestMapping("/addGoodsCategory")
 	public String addGoodsCategory(Model model) {
@@ -58,7 +59,7 @@ public class GoodsController {
 		}
 		System.out.println(goods);
 		goodsService.addGoods(goods);
-		return "";
+		return "forward:../goods/getGoods";
 	}
 
 	public String uploadThumbnail(MultipartFile thumbnail) {
@@ -94,6 +95,24 @@ public class GoodsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "goodsImages/" + suffix;// 將上傳圖片存到DB	
+		return "goodsImages/" + suffix;// 將上傳圖片存到DB
+	}
+
+	@RequestMapping("/getGoods")
+	public String getGoods(Model model, Goods goods) {
+		System.out.println("控制層: getGoods()...");
+		System.out.println("----------->" + goods);
+
+		// 在添加商品中的所屬分類下拉選項列出清單
+		categoryList = categorySerciet.getCategories();
+		model.addAttribute("categoryList", categoryList);
+
+		Object[] obj = new Object[] { goods.getName(), goods.getCategory(), goods.getPrice2(), goods.getStock() };
+
+		// 建立一個接受顯示商品清單的集合
+		goodsList = goodsService.getGoods(obj);
+		model.addAttribute("goodsList", goodsList);
+		System.out.println(goodsList);
+		return "forward:../admincenter/product-list.jsp";
 	}
 }
