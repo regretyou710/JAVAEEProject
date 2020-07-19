@@ -40,13 +40,17 @@
 	content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
+<%
+		String path1 = (String) request.getContextPath();
+		String path2 = path1 + "/page/";		
+	%>
 	<header class="navbar-wrapper">
 		<div class="navbar navbar-fixed-top">
 			<div class="container-fluid cl">
 				<a class="logo navbar-logo f-l mr-10 hidden-xs"
-					href="../mall/html/index.jsp">Happy購</a> <a
+					href="<%=path1%>/index.jsp">Happy購</a> <a
 					class="logo navbar-logo-m f-l mr-10 visible-xs"
-					href="../mall/html/index.jsp">Happy購</a> <span
+					href="<%=path1%>/index.jsp">Happy購</a> <span
 					class="logo navbar-slogan f-l mr-10 hidden-xs"></span> <a
 					aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs"
 					href="javascript:;">&#xe667;</a>

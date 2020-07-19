@@ -34,6 +34,27 @@
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <title>管理员列表</title>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript"
+	src="../admincenter/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../admincenter/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript"
+	src="../admincenter/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript"
+	src="../admincenter/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript"
+	src="../admincenter/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript"
+	src="../admincenter/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#categoryid').val('${goods.category.id}');
+	});
+</script>
 </head>
 <body>
 	<nav class="breadcrumb">
@@ -48,14 +69,14 @@
 		<div class="text-c">
 			<form action="../goods/getGoods" method="post">
 				<span class="select-box inline"> <select name="category.id"
-					class="select">
+					id="categoryid" class="select">
 						<option value="">分類選擇</option>
 						<c:forEach items="${categoryList}" var="items">
 							<option value="${items.id}">${items.name}</option>
 						</c:forEach>
 				</select>
 				</span> 商品名稱：<input type="text" class="input-text" style="width:250px"
-					placeholder="" id="" name="name">
+					placeholder="" name="name" value="${goods.name}">
 				<button type="submit" class="btn btn-success">
 					<i class="Hui-iconfont">&#xe665;</i> 篩選
 				</button>
@@ -69,8 +90,8 @@
 		<table class="table table-border table-bordered table-bg">
 			<thead>
 				<tr class="text-c">
-					<th width="30"><input type="checkbox" name="" value=""></th>
-					<th width="200">商品名稱</th>
+					<th width="50"><input type="checkbox" name="" value=""></th>
+					<th width="300">商品名稱</th>
 					<th width="150">分類</th>
 					<th width="50">銷售價格</th>
 					<th width="50">庫存</th>
@@ -78,10 +99,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${goodsList}" var="items">					
+				<c:forEach items="${goodsList}" var="items">
 					<tr class="text-c">
-						<td><input type="checkbox" value="2" name=""></td>						
-						<td>${items[0]}</td>						
+						<td><input type="checkbox" value="2" name=""></td>
+						<td>${items[0]}</td>
 						<td>${items[1].name}</td>
 						<td>${items[2]}</td>
 						<td>${items[3]}</td>
@@ -96,25 +117,12 @@
 			</tbody>
 		</table>
 	</div>
-	<!--_footer 作为公共模版分离出去-->
-	<script type="text/javascript"
-		src="../admincenter/lib/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="../admincenter/lib/layer/2.4/layer.js"></script>
-	<script type="text/javascript"
-		src="../admincenter/static/h-ui/js/H-ui.min.js"></script>
-	<script type="text/javascript"
-		src="../admincenter/static/h-ui.admin/js/H-ui.admin.js"></script>
-	<!--/_footer 作为公共模版分离出去-->
 
-	<!--请在下方写此页面业务相关的脚本-->
-	<script type="text/javascript"
-		src="../admincenter/lib/My97DatePicker/4.8/WdatePicker.js"></script>
-	<script type="text/javascript"
-		src="../admincenter/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
 		src="../admincenter/lib/laypage/1.2/laypage.js"></script>
+
 	<script type="text/javascript">
+	
 		/*
 			参数解释：
 			title	标题

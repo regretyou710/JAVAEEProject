@@ -15,42 +15,42 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <link rel="stylesheet" type="text/css"
-	href="../html/styles/bootstrap-4.1.3/bootstrap.css">
+	href="../mall/html/styles/bootstrap-4.1.3/bootstrap.css">
 
-<link href="../html/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
+<link href="../mall/html/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css"
-	href="../html/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	href="../mall/html/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css"
-	href="../html/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+	href="../mall/html/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css"
-	href="../html/plugins/OwlCarousel2-2.2.1/animate.css">
+	href="../mall/html/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css"
-	href="../html/styles/main_styles.css">
+	href="../mall/html/styles/main_styles.css">
 <link rel="stylesheet" type="text/css"
-	href="../html/styles/responsive.css">
+	href="../mall/html/styles/responsive.css">
 
-<script src="../html/js/jquery-3.2.1.min.js"></script>
-<script src="../html/styles/bootstrap-4.1.3/popper.js"></script>
-<script src="../html/styles/bootstrap-4.1.3/bootstrap.min.js"></script>
-<script src="../html/plugins/greensock/TweenMax.min.js"></script>
-<script src="../html/plugins/greensock/TimelineMax.min.js"></script>
-<script src="../html/plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="../html/plugins/greensock/animation.gsap.min.js"></script>
-<script src="../html/plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="../html/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="../html/plugins/easing/easing.js"></script>
-<script src="../html/plugins/parallax-js-master/parallax.min.js"></script>
-<script src="../html/plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="../html/plugins/Isotope/fitcolumns.js"></script>
-<script src="../html/js/custom.js"></script>
+<script src="../mall/html/js/jquery-3.2.1.min.js"></script>
+<script src="../mall/html/styles/bootstrap-4.1.3/popper.js"></script>
+<script src="../mall/html/styles/bootstrap-4.1.3/bootstrap.min.js"></script>
+<script src="../mall/html/plugins/greensock/TweenMax.min.js"></script>
+<script src="../mall/html/plugins/greensock/TimelineMax.min.js"></script>
+<script src="../mall/html/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="../mall/html/plugins/greensock/animation.gsap.min.js"></script>
+<script src="../mall/html/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="../mall/html/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="../mall/html/plugins/easing/easing.js"></script>
+<script src="../mall/html/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="../mall/html/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="../mall/html/plugins/Isotope/fitcolumns.js"></script>
+<script src="../mall/html/js/custom.js"></script>
 </head>
 
 <body>
-<%
-out.print(session.getAttribute("user"));
-out.print("js:"+session);
- %>
+	<%
+		String path1 = (String) request.getContextPath();
+		String path2 = path1 + "/page/";		
+	%>
 	<div class="super_container">
 
 		<!-- Header -->
@@ -66,7 +66,7 @@ out.print("js:"+session);
 
 			<!-- Logo -->
 			<div class="header_logo">
-				<a href="#"><div>
+				<a href="<%=path2%>"><div>
 						Happy<span>購</span>
 					</div></a>
 			</div>
@@ -74,16 +74,17 @@ out.print("js:"+session);
 			<!-- Navigation -->
 			<nav class="header_nav">
 			<ul class="d-flex flex-row align-items-center justify-content-start">
-				<li><a href="index.jsp">首頁</a></li>
-				<c:if test="${empty sessionScope.user or empty sessionScope}">
-					<li><a href="../../login/html/register.html">註冊</a></li>
-					<li><a href="../../login/html/login.html">登入</a></li>
-				</c:if>
-				<c:if
-					test="${not empty sessionScope.user or not empty sessionScope}">
-					<li><a href="../../membercenter/index.jsp">會員中心</a></li>
-					<li><a href="../../user/logout">登出</a></li>
-				</c:if>
+				<li><a href="<%=path2%>">首頁</a></li>
+				<c:choose>
+					<c:when test="${empty sessionScope.user or empty sessionScope}">
+						<li><a href="<%=path1%>/login/html/register.html">註冊</a></li>
+						<li><a href="<%=path1%>/login/html/login.html">登入</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="<%=path1%>/membercenter/index.jsp">會員中心</a></li>
+						<li><a href="<%=path1%>/user/logout">登出</a></li>
+					</c:otherwise>
+				</c:choose>
 				<li><a href="#">未開發</a></li>
 				<!-- Search -->
 				<li><div class="">
@@ -121,7 +122,7 @@ out.print("js:"+session);
 				<div
 					class="cart d-flex flex-row align-items-center justify-content-start">
 					<div class="cart_icon">
-						<a href="cart.html"> <img src="../html/images/bag.png" alt="">
+						<a href="cart.html"> <img src="<%=path1%>/mall/html/images/bag.png" alt="">
 							<div class="cart_num">2</div>
 						</a>
 					</div>
@@ -170,16 +171,20 @@ out.print("js:"+session);
 			</div>
 			<nav class="menu_nav">
 			<ul class="menu_mm">
-				<li class="menu_mm"><a href="index.jsp">首頁</a></li>
-				<c:if test="${empty sessionScope.user or empty sessionScope}">
-					<li class="menu_mm"><a href="../../login/html/register.html">註冊</a></li>
-					<li class="menu_mm"><a href="../../login/html/login.html">登入</a></li>
-				</c:if>
-				<c:if
-					test="${not empty sessionScope.user or not empty sessionScope}">
-					<li class="menu_mm"><a href="../../membercenter/index.jsp">會員中心</a></li>
-					<li class="menu_mm"><a href="../../user/logout">登出</a></li>
-				</c:if>
+				<li class="menu_mm"><a href="<%=path2%>">首頁</a></li>
+				<c:choose>
+					<c:when test="${empty sessionScope.user or empty sessionScope}">
+						<li class="menu_mm"><a
+							href="<%=path1%>/login/html/register.html">註冊</a></li>
+						<li class="menu_mm"><a
+							href="<%=path1%>/login/html/login.html">登入</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="menu_mm"><a
+							href="<%=path1%>/membercenter/index.jsp">會員中心</a></li>
+						<li class="menu_mm"><a href="<%=path1%>/user/logout">登出</a></li>
+					</c:otherwise>
+				</c:choose>
 				<li class="menu_mm"><a href="#">未開發</a></li>
 			</ul>
 			</nav>
@@ -223,7 +228,7 @@ out.print("js:"+session);
 
 			<!-- Logo -->
 			<div class="sidebar_logo">
-				<a href="#"><div>
+				<a href="<%=path2%>"><div>
 						Happy<span>購</span>
 					</div></a>
 			</div>
@@ -231,22 +236,22 @@ out.print("js:"+session);
 			<!-- Sidebar Navigation -->
 			<nav class="sidebar_nav">
 			<ul>
-				<li><a href="index.jsp">首頁<i class="fa fa-angle-right"
+				<li><a href="<%=path2%>">首頁<i class="fa fa-angle-right"
 						aria-hidden="true"></i></a></li>
-				<c:if test="${empty sessionScope.user or empty sessionScope}">
-					<li><a href="../../login/html/register.html">註冊<i
-							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="../../login/html/login.html">登入<i
-							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-				</c:if>
-				<c:if
-					test="${not empty sessionScope.user or not empty sessionScope}">
-
-					<li><a href="../../membercenter/index.jsp">會員中心<i
-							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-					<li><a href="../../user/logout">登出<i
-							class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-				</c:if>
+				<c:choose>
+					<c:when test="${empty sessionScope.user or empty sessionScope}">
+						<li><a href="<%=path1%>/login/html/register.html">註冊<i
+								class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+						<li><a href="<%=path1%>/login/html/login.html">登入<i
+								class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="<%=path1%>/membercenter/index.jsp">會員中心<i
+								class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+						<li><a href="<%=path1%>/user/logout">登出<i
+								class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+					</c:otherwise>
+				</c:choose>
 				<li><a href="#">未開發<i class="fa fa-angle-right"
 						aria-hidden="true"></i></a></li>
 			</ul>
@@ -267,7 +272,7 @@ out.print("js:"+session);
 			<div
 				class="cart d-flex flex-row align-items-center justify-content-start">
 				<div class="cart_icon">
-					<a href="cart.html"> <img src="../html/images/bag.png" alt="">
+					<a href="cart.html"> <img src="<%=path1%>/mall/html/images/bag.png" alt="">
 						<div class="cart_num">2</div>
 					</a>
 				</div>
@@ -287,7 +292,7 @@ out.print("js:"+session);
 					<!-- Slide -->
 					<div class="owl-item">
 						<div class="background_image"
-							style="background-image:url(../html/images/home_slider_1.jpg)"></div>
+							style="background-image:url(<%=path1%>/mall/html/images/home_slider_1.jpg)"></div>
 						<div class="home_content_container">
 							<div class="home_content">
 								<div
@@ -306,7 +311,7 @@ out.print("js:"+session);
 					<!-- Slide -->
 					<div class="owl-item">
 						<div class="background_image"
-							style="background-image:url(../html/images/home_slider_1.jpg)"></div>
+							style="background-image:url(<%=path1%>/mall/html/images/home_slider_1.jpg)"></div>
 						<div class="home_content_container">
 							<div class="home_content">
 								<div
@@ -325,7 +330,7 @@ out.print("js:"+session);
 					<!-- Slide -->
 					<div class="owl-item">
 						<div class="background_image"
-							style="background-image:url(../html/images/home_slider_1.jpg)"></div>
+							style="background-image:url(<%=path1%>/mall/html/images/home_slider_1.jpg)"></div>
 						<div class="home_content_container">
 							<div class="home_content">
 								<div
@@ -347,13 +352,13 @@ out.print("js:"+session);
 				<div class="home_slider_nav home_slider_prev trans_200">
 					<div
 						class=" d-flex flex-column align-items-center justify-content-center">
-						<img src="../html/images/prev.png" alt="">
+						<img src="<%=path1%>/mall/html/images/prev.png" alt="">
 					</div>
 				</div>
 				<div class="home_slider_nav home_slider_next trans_200">
 					<div
 						class=" d-flex flex-column align-items-center justify-content-center">
-						<img src="../html/images/next.png" alt="">
+						<img src="<%=path1%>/mall/html/images/next.png" alt="">
 					</div>
 				</div>
 
@@ -371,7 +376,7 @@ out.print("js:"+session);
 						<div class="col-lg-4 box_col">
 							<div class="box">
 								<div class="box_image">
-									<img src="../html/images/box_1.jpg" alt="">
+									<img src="<%=path1%>/mall/html/images/box_1.jpg" alt="">
 								</div>
 								<div class="box_title trans_200">
 									<a href="categories.html">女士系列</a>
@@ -383,7 +388,7 @@ out.print("js:"+session);
 						<div class="col-lg-4 box_col">
 							<div class="box">
 								<div class="box_image">
-									<img src="../html/images/box_2.jpg" alt="">
+									<img src="<%=path1%>/mall/html/images/box_2.jpg" alt="">
 								</div>
 								<div class="box_title trans_200">
 									<a href="categories.html">男士系列</a>
@@ -395,7 +400,7 @@ out.print("js:"+session);
 						<div class="col-lg-4 box_col">
 							<div class="box">
 								<div class="box_image">
-									<img src="../html/images/box_3.jpg" alt="">
+									<img src="<%=path1%>/mall/html/images/box_3.jpg" alt="">
 								</div>
 								<div class="box_title trans_200">
 									<a href="categories.html">未開發</a>
@@ -442,7 +447,7 @@ out.print("js:"+session);
 								<div class="product grid-item hot">
 									<div class="product_inner">
 										<div class="product_image">
-											<img src="../html/images/product_1.jpg" alt="">
+											<img src="<%=path1%>/mall/html/images/product_1.jpg" alt="">
 											<div class="product_tag">hot</div>
 										</div>
 										<div class="product_content text-center">
@@ -461,7 +466,7 @@ out.print("js:"+session);
 								<div class="product grid-item">
 									<div class="product_inner">
 										<div class="product_image">
-											<img src="../html/images/product_2.jpg" alt="">
+											<img src="<%=path1%>/mall/html/images/product_2.jpg" alt="">
 										</div>
 										<div class="product_content text-center">
 											<div class="product_title">
@@ -479,7 +484,7 @@ out.print("js:"+session);
 								<div class="product grid-item sale">
 									<div class="product_inner">
 										<div class="product_image">
-											<img src="../html/images/product_3.jpg" alt="">
+											<img src="<%=path1%>/mall/html/images/product_3.jpg" alt="">
 											<div class="product_tag">sale</div>
 										</div>
 										<div class="product_content text-center">
@@ -500,7 +505,7 @@ out.print("js:"+session);
 								<div class="product grid-item">
 									<div class="product_inner">
 										<div class="product_image">
-											<img src="../html/images/product_4.jpg" alt="">
+											<img src="<%=path1%>/mall/html/images/product_4.jpg" alt="">
 										</div>
 										<div class="product_content text-center">
 											<div class="product_title">
@@ -518,7 +523,7 @@ out.print("js:"+session);
 								<div class="product grid-item">
 									<div class="product_inner">
 										<div class="product_image">
-											<img src="../html/images/product_5.jpg" alt="">
+											<img src="<%=path1%>/mall/html/images/product_5.jpg" alt="">
 										</div>
 										<div class="product_content text-center">
 											<div class="product_title">
@@ -536,7 +541,7 @@ out.print("js:"+session);
 								<div class="product grid-item new">
 									<div class="product_inner">
 										<div class="product_image">
-											<img src="../html/images/product_6.jpg" alt="">
+											<img src="<%=path1%>/mall/html/images/product_6.jpg" alt="">
 											<div class="product_tag">new</div>
 										</div>
 										<div class="product_content text-center">
@@ -555,7 +560,7 @@ out.print("js:"+session);
 								<div class="product grid-item">
 									<div class="product_inner">
 										<div class="product_image">
-											<img src="../html/images/product_7.jpg" alt="">
+											<img src="<%=path1%>/mall/html/images/product_7.jpg" alt="">
 										</div>
 										<div class="product_content text-center">
 											<div class="product_title">
@@ -573,7 +578,7 @@ out.print("js:"+session);
 								<div class="product grid-item sale">
 									<div class="product_inner">
 										<div class="product_image">
-											<img src="../html/images/product_8.jpg" alt="">
+											<img src="<%=path1%>/mall/html/images/product_8.jpg" alt="">
 											<div class="product_tag">sale</div>
 										</div>
 										<div class="product_content text-center">

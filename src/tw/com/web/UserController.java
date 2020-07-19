@@ -63,10 +63,9 @@ public class UserController {
 
 		if (u != null) {
 			model.addAttribute("user", u);
-			return "redirect:../mall/html/index.jsp";
-
+			//return "redirect:../mall/html/index.jsp";
+			return "redirect:/index.jsp";
 		} else {
-			System.out.println(context.getContextPath());
 			return "redirect:/login/html/login.html";
 		}
 
@@ -75,9 +74,9 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(SessionStatus status) {
 		System.out.println("控制層: logout()...");
-
 		status.setComplete();
-		return "redirect:/mall/html/index.jsp";
+		//return "redirect:/mall/html/index.jsp";
+		return "redirect:/index.jsp";
 	}
 
 	@RequestMapping("/uploadAvatar")

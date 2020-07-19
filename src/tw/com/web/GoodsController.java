@@ -101,7 +101,6 @@ public class GoodsController {
 	@RequestMapping("/getGoods")
 	public String getGoods(Model model, Goods goods) {
 		System.out.println("控制層: getGoods()...");
-		System.out.println("----------->" + goods);
 
 		// 在添加商品中的所屬分類下拉選項列出清單
 		categoryList = categorySerciet.getCategories();
@@ -112,6 +111,7 @@ public class GoodsController {
 		// 建立一個接受顯示商品清單的集合
 		goodsList = goodsService.getGoods(obj);
 		model.addAttribute("goodsList", goodsList);
+		model.addAttribute("goods", goods);
 		System.out.println(goodsList);
 		return "forward:../admincenter/product-list.jsp";
 	}

@@ -14,7 +14,8 @@
 
 <body>
 	<%
-		response.sendRedirect("mall/html/index.jsp");
+		response.sendRedirect("page/");
+		//response.sendRedirect("mall/html/index.jsp");
 	%>	
 </body>
 </html>
