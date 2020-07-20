@@ -17,7 +17,8 @@
 <link rel="stylesheet" type="text/css"
 	href="../mall/html/styles/bootstrap-4.1.3/bootstrap.css">
 
-<link href="../mall/html/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
+<link
+	href="../mall/html/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css"
 	href="../mall/html/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -49,7 +50,7 @@
 <body>
 	<%
 		String path1 = (String) request.getContextPath();
-		String path2 = path1 + "/page/";		
+		String path2 = path1 + "/page/";
 	%>
 	<div class="super_container">
 
@@ -122,7 +123,8 @@
 				<div
 					class="cart d-flex flex-row align-items-center justify-content-start">
 					<div class="cart_icon">
-						<a href="cart.html"> <img src="<%=path1%>/mall/html/images/bag.png" alt="">
+						<a href="cart.html"> <img
+							src="<%=path1%>/mall/html/images/bag.png" alt="">
 							<div class="cart_num">2</div>
 						</a>
 					</div>
@@ -272,7 +274,8 @@
 			<div
 				class="cart d-flex flex-row align-items-center justify-content-start">
 				<div class="cart_icon">
-					<a href="cart.html"> <img src="<%=path1%>/mall/html/images/bag.png" alt="">
+					<a href="cart.html"> <img
+						src="<%=path1%>/mall/html/images/bag.png" alt="">
 						<div class="cart_num">2</div>
 					</a>
 				</div>
@@ -379,7 +382,7 @@
 									<img src="<%=path1%>/mall/html/images/box_1.jpg" alt="">
 								</div>
 								<div class="box_title trans_200">
-									<a href="categories.html">女士系列</a>
+									<a href="<%=path1%>/mall/html/categories.jsp">女士系列</a>
 								</div>
 							</div>
 						</div>
@@ -600,5 +603,6 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
