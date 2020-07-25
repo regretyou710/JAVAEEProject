@@ -1,0 +1,15 @@
+/Demo_ShoppingMall_ClinetSide/WebRoot/login/html/register.html
+/Demo_ShoppingMall_ClinetSide/WebRoot/login/html/login.html
+/Demo_ShoppingMall_ClinetSide/WebRoot/mall/html/index.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/membercenter/member-add.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/membercenter/member-address.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/membercenter/index.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/membercenter/welcome.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/adminlogin/html/index.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/admincenter/index.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/admincenter/product-categorylist.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/admincenter/product-addcategory.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/admincenter/picture-add.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/admincenter/product-list.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/mall/html/product.jsp
+/Demo_ShoppingMall_ClinetSide/WebRoot/mall/html/template.jsp
