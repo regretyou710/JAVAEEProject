@@ -1,3 +1,4 @@
+//專寫的page
 /Demo_ShoppingMall_ClinetSide/WebRoot/login/html/register.html
 /Demo_ShoppingMall_ClinetSide/WebRoot/login/html/login.html
 /Demo_ShoppingMall_ClinetSide/WebRoot/mall/html/index.jsp
